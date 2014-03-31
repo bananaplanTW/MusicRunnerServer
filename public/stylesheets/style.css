@@ -1,0 +1,52 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7F0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul.duration_container {
+	display: block;
+}
+
+ul.new_member {
+	display: block;
+}
+
+.duration {
+	float: left;
+	padding: 10px;
+}
+
+.check {
+	float: left;
+	padding: 10px;
+	width: 20px;
+}
+
+.available {
+	background-color: #98FB98
+}
+
+.unavailable {
+	background-color: #F08080
+}
+
+.date {
+	min-width: 60px;
+}
+
+.event-title {
+	padding-left: 20px;
+	font-size: 30px;
+}
+
+.welcome-title {
+	font-size: 25px;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="/javascripts/jquery.jplayer.min.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function(){
+      $("#jquery_jplayer_1").jPlayer({
+       ready: function () {
+        $(this).jPlayer("setMedia", {
+         mp3: "/source/?file=thislove.mp3"
+        });
+       },
+       swfPath: "/javascripts",
+       supplied: "mp3"
+      });
+     });
+    </script>
+  </head>
+<body>
+<div id="jquery_jplayer_1"></div>
+<div id="jp_container_1">
+ <a href="#" class="jp-play">Play</a>
+ <a href="#" class="jp-pause">Pause</a>
+</div>
+</body>
+</html>

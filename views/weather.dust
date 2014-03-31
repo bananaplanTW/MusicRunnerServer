@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+{#weatherData.location}
+<div>
+<span>
+{name}:
+{#weather-elements}
+{#Wx}
+{#time}
+{text}<br>
+{/time}
+{/Wx}
+{/weather-elements}
+</span><br>
+</div>
+{/weatherData.location}
+
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+{#files}
+<div>
+<span>{.}</span><br>
+<audio controls>
+  <source src="/source/?file={.}" type="audio/mp3">
+</audio>
+</div>
+{/files}
+</body>
+</html>
