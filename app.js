@@ -34,5 +34,6 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/weather', routes.weather);
+app.get('/yweather', routes.yweather);
 
 app.listen(3000);

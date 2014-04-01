@@ -21,8 +21,31 @@ exports.weather = function(req, res){
         });
         response.on('end', function () {
             parseString(data_xml, function (err, result) {
-                console.log(result.fifowml.data[0].location[0]['weather-elements'][0].Wx[0].time[0]);
                 res.render('weather', {weatherData:result.fifowml.data[0]});
+            });
+        });
+    });
+    request.on('error', function (e) {
+        console.log(e);
+    });
+    request.end();
+};
+
+exports.yweather = function (req, res) {
+    var options = {
+        hostname : "weather.yahooapis.com/forecastrss",
+        path: "/forecastrss?w=12703524&u=c"
+    };
+    var data;
+    var request = http.get('http://weather.yahooapis.com/forecastrss?w=12703524&u=c', function (response) {
+        console.log(response.statusCode);
+        var data_xml = "";
+        response.on('data', function (chunk) {
+            data_xml += chunk.toString();
+        });
+        response.on('end', function () {
+            parseString(data_xml, function (err, result) {
+                res.render('yweather', {yweatherData:result.rss.channel[0]});
             });
         });
     });

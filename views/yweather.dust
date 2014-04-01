@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+{#yweatherData.item}
+{description}
+{/yweatherData.item}
+
+</body>
+</html>
