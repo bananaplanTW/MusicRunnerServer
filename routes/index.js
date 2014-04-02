@@ -46,7 +46,6 @@ exports.yweather = function (req, res) {
         response.on('end', function () {
             parseString(data_xml, function (err, result) {
                 var jsonResult = JSON.stringify(result.rss.channel[0]);
-                console.log(jsonResult);
                 res.render('yweather', {yweatherData:jsonResult});
             });
         });

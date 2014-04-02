@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+{yweatherData}
 {#yweatherData.item}
 {description}
 {/yweatherData.item}
