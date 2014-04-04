@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+{#youBikeData}
+Station: {sna}<br>
+Total number of bikes: {tot}<br>
+Available bikes: {sbi}<br>
+Address: {ar}<br><br>
+{/youBikeData}
+</body>
+</html>
