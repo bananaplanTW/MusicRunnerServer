@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<body>
+{#landscapeIconData}
+Place: {Name}<br>
+Address: {Add}<br>
+{/landscapeIconData}
+</body>
+</html>
