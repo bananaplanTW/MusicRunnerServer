@@ -36,5 +36,6 @@ if ('development' == app.get('env')) {
 app.get('/weather', routes.weather);
 app.get('/yweather', routes.yweather);
 app.get('/youBike', routes.youBike);
+app.get('/landscapeIcon', routes.landscapeIcon);
 
 app.listen(3000);
