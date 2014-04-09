@@ -5,7 +5,8 @@
 var fs = require('fs');
 var http = require('http');
 var path = require('path');
-var parseString = require('xml2js').parseString;
+var parser = require('xml2js');
+var parseString = parser.parseString;
 
 exports.weather = function(req, res){
     var options = {
@@ -22,6 +23,43 @@ exports.weather = function(req, res){
         response.on('end', function () {
             parseString(data_xml, function (err, result) {
                 res.render('weather', {weatherData:result.fifowml.data[0]});
+            });
+        });
+    });
+    request.on('error', function (e) {
+        console.log(e);
+    });
+    request.end();
+};
+
+exports.weatherJSON = function(req, res){
+    var options = {
+        hostname : "opendata.cwb.gov.tw",
+        path: "opendata/MFC/F-C0032-001.xml"
+    };
+    var data;
+    var request = http.get('http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml', function (response) {
+        console.log(response.statusCode);
+        var data_xml = "";
+        response.on('data', function (chunk) {
+            data_xml += chunk.toString();
+        });
+        response.on('end', function () {
+
+            parseString(data_xml, function (err, result) {
+                var builder = new parser.Builder();
+                var xml = builder.buildObject(result.fifowml.data[0]);
+                //console.log(result.fifowml.data[0]);
+                //console.log(xml);
+                res.writeHead(200, {
+                    'Content-Type': 'text/json'
+                });
+                result.fifowml.data[0].location.forEach(function (loc_item) {
+                    loc_item.name = loc_item.name[0];
+                })
+                //res.write(JSON.stringify({location: [result.fifowml.data[0].location[0]]}));
+                res.write(JSON.stringify(result.fifowml.data[0].location));
+                res.end();
             });
         });
     });
