@@ -37,15 +37,14 @@ exports.weatherJSON = function(req, res){
         hostname : "opendata.cwb.gov.tw",
         path: "opendata/MFC/F-C0032-001.xml"
     };
+    var cityCode = req.query.cityCode;
     var data;
     var request = http.get('http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml', function (response) {
-        console.log(response.statusCode);
         var data_xml = "";
         response.on('data', function (chunk) {
             data_xml += chunk.toString();
         });
         response.on('end', function () {
-
             parseString(data_xml, function (err, result) {
                 var builder = new parser.Builder();
                 var xml = builder.buildObject(result.fifowml.data[0]);
@@ -57,8 +56,9 @@ exports.weatherJSON = function(req, res){
                 result.fifowml.data[0].location.forEach(function (loc_item) {
                     loc_item.name = loc_item.name[0];
                 })
+                console.log(result.fifowml.data[0].location[cityCode]);
                 //res.write(JSON.stringify({location: [result.fifowml.data[0].location[0]]}));
-                res.write(JSON.stringify(result.fifowml.data[0].location));
+                res.write(JSON.stringify(result.fifowml.data[0].location[cityCode]));
                 res.end();
             });
         });
