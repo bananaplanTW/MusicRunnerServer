@@ -7,6 +7,7 @@ var http = require('http');
 var path = require('path');
 var parser = require('xml2js');
 var parseString = parser.parseString;
+var handleUsers = require('../stores/users');
 
 exports.weather = function(req, res){
     var options = {
