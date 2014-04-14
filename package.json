@@ -13,6 +13,7 @@
     "less-middleware": "*",
     "mongoose": "*",
     "musicmetadata": "*",
-    "xml2js": "*"
+    "xml2js": "*",
+    "mysql" : "*"
   }
 }

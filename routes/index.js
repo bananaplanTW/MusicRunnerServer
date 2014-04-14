@@ -37,7 +37,7 @@ exports.weatherJSON = function(req, res){
         hostname : "opendata.cwb.gov.tw",
         path: "opendata/MFC/F-C0032-001.xml"
     };
-    var cityCode = req.query.cityCode;
+    var cityCode = req.query.cityCode || 0;
     var data;
     var request = http.get('http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml', function (response) {
         var data_xml = "";
@@ -120,16 +120,11 @@ exports.youBike = function (req, res) {
 exports.landscapeIcon = function (req, res) {
     var data;
     var request = http.get('http://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=1&FileType=1&Lang=C', function (response) {
-        console.log('QQ' + response.statusCode);
         var data_json = "";
         response.on('data', function (chunk) {
             data_json += chunk.toString();
         });
         response.on('end', function () {
-            /*parseString(data_xml, function (err, result) {
-                var jsonResult = JSON.stringify(result.rss.channel[0]);
-                res.render('yweather', {yweatherData:jsonResult});
-            });*/
             data = JSON.parse(data_json);
             console.log(data);
             res.render('landscapeIcon', {landscapeIconData: data});

@@ -1,0 +1,19 @@
+{
+	"port" : 3000,
+	"template-engine" : "dust",
+	"routes" : [
+		{
+			"method" : "get",
+		    "settings" : [
+				{
+					"path" : "/weatherJSON",
+					"value" : "weatherJSON"
+				},
+				{
+					"path" : "/youBike",
+					"value" : "youBike"
+				}
+			]
+		}
+	]
+}
