@@ -7,7 +7,7 @@ var mysql = require('mysql'),
 	});
 
 try {
-	connection.connect();
+	//connection.connect();
 } catch (e) {
 	console.error('erorr on connecting to db');
 }

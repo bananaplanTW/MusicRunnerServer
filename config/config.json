@@ -12,6 +12,10 @@
 				{
 					"path" : "/youBike",
 					"value" : "youBike"
+				},
+				{
+					"path" : "/youBikeJSON",
+					"value" : "youBikeJSON"
 				}
 			]
 		}
