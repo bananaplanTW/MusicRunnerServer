@@ -6,7 +6,7 @@ var weatherModel = require('../models/weather');
 var WeatherCollector = weatherModel.WeatherCollector;
 
 //var fs = require('fs');
-//var ff = new fs.createWriteStream('hv.json');
+//var ff = new fs.createWriteStream('UV.json');
 
 exports.get36HoursWeather = function (cityCode, collector) {
     var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml';
@@ -26,7 +26,7 @@ exports.get36HoursWeather = function (cityCode, collector) {
     api.getHttpResponse(url, parseData);
 };
 
-exports.getCityHV = function (cityCode, collector) {
+exports.getCityUV = function (cityCode, collector) {
     var url = 'http://opendata.cwb.gov.tw/opendata/DIV2/O-A0005-001.xml';
     var parseData = function (error, data) {
         if (error) {
@@ -34,9 +34,9 @@ exports.getCityHV = function (cityCode, collector) {
             return;
         }
         parseString(data, function (error, result) {
-            var HV = weatherLib.parseCityHV(result.cwbopendata.dataset[0].weatherElement[0].location, cityCode);
-            collector.isGettingHV = true;
-            collector.emit('data', HV);
+            var UV = weatherLib.parseCityUV(result.cwbopendata.dataset[0].weatherElement[0].location, cityCode);
+            collector.isGettingUV = true;
+            collector.emit('data', UV);
         });
     };
     api.getHttpResponse(url, parseData);
@@ -46,5 +46,5 @@ exports.get = function(cityCode, callback){
     var cityCode = cityCode || 0;
     var weatherCollector = new WeatherCollector(callback);
     this.get36HoursWeather(cityCode, weatherCollector);
-    this.getCityHV('466920', weatherCollector);
+    this.getCityUV('466920', weatherCollector);
 };

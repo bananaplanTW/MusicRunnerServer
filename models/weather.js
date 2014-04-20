@@ -8,20 +8,20 @@ function WeatherCollector (_callback) {
     var callback = _callback;
 
     this.isGetting36Hours = false;
-    this.isGettingHV = false;
+    this.isGettingUV = false;
     
     this.on('data', function (data) {
         var type;
         for (type in data) {
             weatherData[type] = data[type];
         }
-        if (this.isGetting36Hours && this.isGettingHV) {
+        if (this.isGetting36Hours && this.isGettingUV) {
             callback(null, JSON.stringify(weatherData));
         }
     });
     this.on('error', function (error) {
         console.log(error);
-        if (this.isGetting36Hours && this.isGettingHV) {
+        if (this.isGetting36Hours && this.isGettingUV) {
             callback(null, JSON.stringify(weatherData));
         }
     });
