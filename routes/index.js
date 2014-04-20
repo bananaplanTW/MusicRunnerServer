@@ -8,6 +8,7 @@ var path = require('path');
 var parser = require('xml2js');
 var parseString = parser.parseString;
 var handleUsers = require('../stores/users');
+var weatherStore = require('../stores/weather');
 
 exports.weather = function(req, res){
     var options = {
@@ -34,40 +35,18 @@ exports.weather = function(req, res){
 };
 
 exports.weatherJSON = function(req, res){
-    var options = {
-        hostname : "opendata.cwb.gov.tw",
-        path: "opendata/MFC/F-C0032-001.xml"
-    };
-    var cityCode = req.query.cityCode || 0;
-    var data;
-    var request = http.get('http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml', function (response) {
-        var data_xml = "";
-        response.on('data', function (chunk) {
-            data_xml += chunk.toString();
+    weatherStore.get(req.query.cityCode, function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
         });
-        response.on('end', function () {
-            parseString(data_xml, function (err, result) {
-                var builder = new parser.Builder();
-                var xml = builder.buildObject(result.fifowml.data[0]);
-                //console.log(result.fifowml.data[0]);
-                //console.log(xml);
-                res.writeHead(200, {
-                    'Content-Type': 'text/json'
-                });
-                result.fifowml.data[0].location.forEach(function (loc_item) {
-                    loc_item.name = loc_item.name[0];
-                })
-                console.log(result.fifowml.data[0].location[cityCode]);
-                //res.write(JSON.stringify({location: [result.fifowml.data[0].location[0]]}));
-                res.write(JSON.stringify(result.fifowml.data[0].location[cityCode]));
-                res.end();
-            });
-        });
+        res.write(data);
+        res.end();
     });
-    request.on('error', function (e) {
-        console.log(e);
-    });
-    request.end();
 };
 
 exports.yweather = function (req, res) {
