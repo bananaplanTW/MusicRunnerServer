@@ -1,5 +1,13 @@
 {
-	"cityMapping" : {
+	"cityMapping" : [
+		{
+			"ch" : "臺北市",
+			"en" : "Taipei City",
+			"uv" : "466920"
+		}
+	],
+	"back":
+	{
 		"467440" : {
 			"ch" : "高雄"
 		},

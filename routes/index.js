@@ -9,6 +9,7 @@ var parser = require('xml2js');
 var parseString = parser.parseString;
 var handleUsers = require('../stores/users');
 var weatherStore = require('../stores/weather');
+var youBikeStore = require('../stores/youbike');
 
 exports.weather = function(req, res){
     var options = {
@@ -98,6 +99,19 @@ exports.youBike = function (req, res) {
 };
 
 exports.youBikeJSON = function (req, res) {
+    youBikeStore.get(function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
+        });
+        res.write(data);
+        res.end();
+    });
+    /*
     var data;
     var request = http.get('http://its.taipei.gov.tw/atis_index/data/youbike/youbike.json', function (response) {
         var data_json = "";
@@ -116,7 +130,7 @@ exports.youBikeJSON = function (req, res) {
     request.on('error', function (e) {
         console.log(e);
     });
-    request.end();
+    request.end();*/
 };
 
 exports.landscapeIcon = function (req, res) {

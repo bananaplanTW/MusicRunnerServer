@@ -2,13 +2,16 @@ var parser = require('xml2js');
 var parseString = parser.parseString;
 var weatherLib = require('../lib/weather');
 var api = require('../lib/call_api');
+var weatherMappingData = require('../data/weather.json');
 var weatherModel = require('../models/weather');
 var WeatherCollector = weatherModel.WeatherCollector;
+var cityMapping = weatherMappingData.cityMapping;
+
 
 //var fs = require('fs');
 //var ff = new fs.createWriteStream('UV.json');
 
-exports.get36HoursWeather = function (cityCode, collector) {
+exports.get36HoursWeather = function (city, collector) {
     var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml';
     var parseData = function (error, data) {
         if (error) {
@@ -18,7 +21,7 @@ exports.get36HoursWeather = function (cityCode, collector) {
         parseString(data, function (error, result) {
             //var builder = new parser.Builder();
             //var xml = builder.buildObject(result.fifowml.data[0]);
-            var parsedWeather = weatherLib.parse36HoursCityWeather(result.fifowml.data[0].location[cityCode]);
+            var parsedWeather = weatherLib.parse36HoursCityWeather(result.fifowml.data[0].location[city]);
             collector.isGetting36Hours = true;
             collector.emit('data', parsedWeather);
         });
@@ -26,7 +29,7 @@ exports.get36HoursWeather = function (cityCode, collector) {
     api.getHttpResponse(url, parseData);
 };
 
-exports.getCityUV = function (cityCode, collector) {
+exports.getCityUV = function (city, collector) {
     var url = 'http://opendata.cwb.gov.tw/opendata/DIV2/O-A0005-001.xml';
     var parseData = function (error, data) {
         if (error) {
@@ -34,7 +37,7 @@ exports.getCityUV = function (cityCode, collector) {
             return;
         }
         parseString(data, function (error, result) {
-            var UV = weatherLib.parseCityUV(result.cwbopendata.dataset[0].weatherElement[0].location, cityCode);
+            var UV = weatherLib.parseCityUV(result.cwbopendata.dataset[0].weatherElement[0].location, city);
             collector.isGettingUV = true;
             collector.emit('data', UV);
         });
@@ -46,5 +49,5 @@ exports.get = function(cityCode, callback){
     var cityCode = cityCode || 0;
     var weatherCollector = new WeatherCollector(callback);
     this.get36HoursWeather(cityCode, weatherCollector);
-    this.getCityUV('466920', weatherCollector);
+    this.getCityUV(cityMapping[cityCode].uv, weatherCollector);
 };
