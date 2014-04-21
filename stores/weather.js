@@ -7,7 +7,6 @@ var weatherModel = require('../models/weather');
 var WeatherCollector = weatherModel.WeatherCollector;
 var cityMapping = weatherMappingData.cityMapping;
 
-
 //var fs = require('fs');
 //var ff = new fs.createWriteStream('UV.json');
 

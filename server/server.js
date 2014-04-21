@@ -6,6 +6,7 @@ var express = require('express'),
     template_enging = config['template-engine'],
     cons = require('consolidate');
 
+var checking_update = require('child_process').fork(__dirname + '/../background/checking_update.js');
 var app = express();
 
 // all environments
@@ -14,7 +15,6 @@ app.set('views', __dirname + '/../views');
 app.set('view engine', template_enging);
 
 app.engine(template_enging, cons.dust);
-console.log('server');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
@@ -33,11 +33,6 @@ config.routes.forEach(function (route) {
 		app[method](setting.path, routes[setting.value]);
 	});
 });
-/*
-app.get('/weather', routes.weather);
-app.get('/weatherJSON', routes.weatherJSON);
-app.get('/yweather', routes.yweather);
-app.get('/youBike', routes.youBike);
-app.get('/landscapeIcon', routes.landscapeIcon);
-*/
 app.listen(3000);
+console.log('server starts');
+checking_update.send('ready');
