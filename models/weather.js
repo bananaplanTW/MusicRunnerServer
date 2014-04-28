@@ -9,19 +9,27 @@ function WeatherCollector (_callback) {
 
     this.isGetting36Hours = false;
     this.isGettingUV = false;
+    this.isGettingWeekWeather = false;
     
     this.on('data', function (data) {
         var type;
-        for (type in data) {
-            weatherData[type] = data[type];
+        if (Array.isArray(data)) {
+            //for week weather data
+            weatherData = data;
+        } else {
+            for (type in data) {
+                weatherData[type] = data[type];
+            }
         }
-        if (this.isGetting36Hours && this.isGettingUV) {
+        if ((this.isGetting36Hours && this.isGettingUV) ||
+             this.isGettingWeekWeather) {
             callback(null, JSON.stringify(weatherData));
         }
     });
     this.on('error', function (error) {
         console.log(error);
-        if (this.isGetting36Hours && this.isGettingUV) {
+        if ((this.isGetting36Hours && this.isGettingUV) ||
+             this.isGettingWeekWeather) {
             callback(null, JSON.stringify(weatherData));
         }
     });

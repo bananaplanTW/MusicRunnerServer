@@ -50,6 +50,21 @@ exports.weatherJSON = function(req, res){
     });
 };
 
+exports.weatherWeekJSON = function(req, res){
+    weatherStore.getWeek(req.query.cityCode, function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
+        });
+        res.write(data);
+        res.end();
+    });
+};
+
 exports.yweather = function (req, res) {
     var options = {
         hostname : "weather.yahooapis.com/forecastrss",

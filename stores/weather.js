@@ -14,6 +14,8 @@ exports.get36HoursWeather = function (city, collector) {
     var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml';
     var parseData = function (error, data) {
         if (error) {
+            //[TODO] error should be handled
+            collector.isGetting36Hours = true;
             collector.emit('error', error);
             return;
         }
@@ -32,6 +34,8 @@ exports.getCityUV = function (city, collector) {
     var url = 'http://opendata.cwb.gov.tw/opendata/DIV2/O-A0005-001.xml';
     var parseData = function (error, data) {
         if (error) {
+            //[TODO] error should be handled
+            collector.isGettingUV = true;
             collector.emit('error', error);
             return;
         }
@@ -44,9 +48,33 @@ exports.getCityUV = function (city, collector) {
     api.getHttpResponse(url, parseData);
 }
 
+exports.getWeekWeather = function (city, collector, callback) {
+    var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-005.xml';
+    var parseData = function (error, data) {
+        if (error) {
+            //[TODO] error should be handled
+            collector.isGettingWeekWeather = true;
+            collector.emit('error', error);
+            return;
+        }
+        parseString(data, function (error, result) {
+            var weekWeather = weatherLib.parseWeekWeather(result.fifowml.data[0].location[city]['weather-elements'][0]);
+            collector.isGettingWeekWeather = true;
+            collector.emit('data', weekWeather);
+        });
+    };
+    api.getHttpResponse(url, parseData);
+}
+
 exports.get = function(cityCode, callback){
     var cityCode = cityCode || 0;
     var weatherCollector = new WeatherCollector(callback);
     this.get36HoursWeather(cityCode, weatherCollector);
     this.getCityUV(cityMapping[cityCode].uv, weatherCollector);
+};
+
+exports.getWeek = function(cityCode, callback){
+    var cityCode = cityCode || 0;
+    var weatherCollector = new WeatherCollector(callback);
+    this.getWeekWeather(cityCode, weatherCollector, callback);
 };

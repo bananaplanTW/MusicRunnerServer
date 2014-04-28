@@ -10,6 +10,10 @@
 					"value" : "weatherJSON"
 				},
 				{
+					"path" : "/weatherWeekJSON",
+					"value" : "weatherWeekJSON"
+				},
+				{
 					"path" : "/youBike",
 					"value" : "youBike"
 				},
