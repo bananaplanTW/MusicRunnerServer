@@ -14,6 +14,10 @@
 					"value" : "weatherWeekJSON"
 				},
 				{
+					"path" : "/weather24HoursJSON",
+					"value" : "weather24HoursJSON"
+				},
+				{
 					"path" : "/youBike",
 					"value" : "youBike"
 				},

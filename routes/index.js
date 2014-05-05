@@ -65,6 +65,22 @@ exports.weatherWeekJSON = function(req, res){
     });
 };
 
+exports.weather24HoursJSON = function(req, res){
+    var query = req.query;
+    weatherStore.get24Hours(query.cityCode, query.currentHour, function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
+        });
+        res.write(data);
+        res.end();
+    });
+};
+
 exports.yweather = function (req, res) {
     var options = {
         hostname : "weather.yahooapis.com/forecastrss",

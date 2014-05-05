@@ -8,6 +8,7 @@ function WeatherCollector (_callback) {
     var callback = _callback;
 
     this.isGetting36Hours = false;
+    this.isGetting24Hours = false;
     this.isGettingUV = false;
     this.isGettingWeekWeather = false;
     
@@ -22,7 +23,8 @@ function WeatherCollector (_callback) {
             }
         }
         if ((this.isGetting36Hours && this.isGettingUV) ||
-             this.isGettingWeekWeather) {
+             this.isGettingWeekWeather ||
+             this.isGetting24Hours) {
             callback(null, JSON.stringify(weatherData));
         }
     });
