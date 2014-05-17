@@ -26,6 +26,15 @@
 					"value" : "youBikeJSON"
 				}
 			]
+		},
+		{
+			"method" : "post",
+			"settings" : [
+				{
+					"path" : "/store",
+					"value" : "store"
+				}
+			]
 		}
 	]
 }

@@ -129,6 +129,12 @@ exports.youBike = function (req, res) {
     request.end();
 };
 
+exports.store = function (req, res) {
+    console.log(req);
+    res.write("get it");
+    res.end();
+};
+
 exports.youBikeJSON = function (req, res) {
     youBikeStore.get(function (error, data) {
         if (error) {
