@@ -14,12 +14,25 @@
 					"value" : "weatherWeekJSON"
 				},
 				{
+					"path" : "/weather24HoursJSON",
+					"value" : "weather24HoursJSON"
+				},
+				{
 					"path" : "/youBike",
 					"value" : "youBike"
 				},
 				{
 					"path" : "/youBikeJSON",
 					"value" : "youBikeJSON"
+				}
+			]
+		},
+		{
+			"method" : "post",
+			"settings" : [
+				{
+					"path" : "/store",
+					"value" : "store"
 				}
 			]
 		}
