@@ -24,6 +24,10 @@
 				{
 					"path" : "/youBikeJSON",
 					"value" : "youBikeJSON"
+				},
+				{
+					"path" : "/landscapeIcon",
+					"value" : "landscapeIcon"
 				}
 			]
 		},
