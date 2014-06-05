@@ -78,3 +78,11 @@ exports.getWeek = function(cityCode, callback){
     var weatherCollector = new WeatherCollector(callback);
     this.getWeekWeather(cityCode, weatherCollector, callback);
 };
+var weatherUrl = "http://japi1-a.global.media.vip.sg3.yahoo.com:4080/weather_api/v1/forecast/2502265?lang=en-US&region=US&ycb_ctx=site%3Anews%2Cproxy%3Aoff&y_ctx=bucket%3A%2Cdevice%3Afull%2Cschedule%3A%2Cstatus%3Alive&format=json";
+api.getHttpResponse(weatherUrl, function (error, data) {
+    if(error) {
+        console.log(error);
+    } else {
+        console.log(data);
+    }
+});
