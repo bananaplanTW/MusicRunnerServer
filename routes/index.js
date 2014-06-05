@@ -152,15 +152,20 @@ exports.youBikeJSON = function (req, res) {
 
 exports.landscapeIcon = function (req, res) {
     var data;
-    var request = http.get('http://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=1&FileType=1&Lang=C', function (response) {
+    console.log("retrieving landscape icon");
+        var request = http.get('http://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=1&FileType=1&Lang=C&FolderType=', function (response) {
         var data_json = "";
         response.on('data', function (chunk) {
             data_json += chunk.toString();
         });
+
         response.on('end', function () {
-            data = JSON.parse(data_json);
-            console.log(data);
-            res.render('landscapeIcon', {landscapeIconData: data});
+            parseString(data_json, function (err, result) {
+                console.log("rending data...");
+                jsonObj = JSON.parse(result.html.body[0].form[0].div[0].span[0]._);
+                console.log(jsonObj[0].Name);
+                res.render('landscapeIcon', {landscapeIconData:jsonObj});
+            });            
         });
     });
     request.on('error', function (e) {
