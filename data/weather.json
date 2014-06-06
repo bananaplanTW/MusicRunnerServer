@@ -4,6 +4,111 @@
 			"ch" : "臺北市",
 			"en" : "Taipei City",
 			"uv" : "466920"
+		},
+		{
+			"ch" : "新北市",
+			"en" : "New Taipei City",
+			"uv" : "466920"
+		},
+		{
+			"ch" : "臺中市",
+			"en" : "Taichung City",
+			"uv" : "467490"
+		},
+		{
+			"ch" : "臺南市",
+			"en" : "Tainan City",
+			"uv" : "467410"
+		},
+		{
+			"ch" : "高雄市",
+			"en" : "Kaohsiung City",
+			"uv" : "467440"
+		},
+		{
+			"ch" : "基隆市",
+			"en" : "Keelung City",
+			"uv" : "466940"
+		},
+		{
+			"ch" : "桃園縣",
+			"en" : "Taoyuan County",
+			"uv" : "467050"
+		},
+		{
+			"ch" : "新竹縣",
+			"en" : "Hishchu County",
+			"uv" : "467570"
+		},
+		{
+			"ch" : "新竹市",
+			"en" : "Hishchu City",
+			"uv" : "467570"
+		},
+		{
+			"ch" : "苗栗縣",
+			"en" : "Miaoli County",
+			"uv" : "467570"
+		},
+		{
+			"ch" : "彰化縣",
+			"en" : "Changhua County",
+			"uv" : "467490"
+		},
+		{
+			"ch" : "南投縣",
+			"en" : "Nantu County",
+			"uv" : "467650"
+		},
+		{
+			"ch" : "雲林縣",
+			"en" : "Yunlin County",
+			"uv" : "467480"
+		},
+		{
+			"ch" : "嘉義縣",
+			"en" : "Chiayi County",
+			"uv" : "467480"
+		},
+		{
+			"ch" : "嘉義市",
+			"en" : "Chiayi City",
+			"uv" : "467480"
+		},
+		{
+			"ch" : "屏東縣",
+			"en" : "Pingtung County",
+			"uv" : "467590"
+		},
+		{
+			"ch" : "宜蘭縣",
+			"en" : "Ilan County",
+			"uv" : "467080"
+		},
+		{
+			"ch" : "花蓮縣",
+			"en" : "Hualian County",
+			"uv" : "466990"
+		},
+		{
+			"ch" : "臺東縣",
+			"en" : "Taitung County",
+			"uv" : "467660"
+		},
+		{
+			"ch" : "澎湖縣",
+			"en" : "Penhu County",
+			"uv" : "467350"
+		},
+		{
+			"ch" : "金門縣",
+			"en" : "Jiman County",
+			"uv" : "467110"
+		},
+		{
+			"ch" : "連江縣",
+			"en" : "Lianjian County",
+			"uv" : "467990"
 		}
 	],
 	"back":
