@@ -1,6 +1,9 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
+var parser = require('xml2js');
+var parseString = parser.parseString;
+
 function WeatherCollector (_callback) {
     EventEmitter.call(this);
 
@@ -38,3 +41,48 @@ function WeatherCollector (_callback) {
 }
 util.inherits(WeatherCollector, EventEmitter);
 exports.WeatherCollector = WeatherCollector;
+
+
+// modulize
+var ModelDailyWeather = function () {
+    // store data in DB?
+    this.data;
+    this.callback;
+
+}
+ModelDailyWeather.prototype.parseData = function (error, data) {
+    if (error) {
+        return;
+    }
+    parseString(data, function (error, result) {
+        var parsedWeather = weatherLib.parse36HoursCityWeather(result.fifowml.data[0].location[city]);
+
+        var parsedWeather = {};
+        var weatherElements = data['weather-elements'][0];
+        parsedWeather.condition = weatherElements.Wx[0].time[0].text[0] || '';
+        parsedWeather.maxT = weatherElements.MaxT[0].time[0].value[0]._ || '';
+        parsedWeather.minT = weatherElements.MinT[0].time[0].value[0]._ || '';
+        parsedWeather.feeling = weatherElements.CI[0].time[0].text[0] || '';
+        parsedWeather['chance-of-rain'] = weatherElements.PoP[0].time[0].value[0]._ || '';
+
+
+        var weather36hours = fs.createWriteStream(__dirname + '/../.cache/weather36hours.json');
+        weather36hours.write(JSON.stringify(result.fifowml.data[0].location));
+        weather36hours.close();
+    });
+};
+ModelDailyWeather.prototype.setData = function (error, data, isFromCache) {
+    if (error) {
+        return;
+    }
+    if (isFromCache) {
+        this.data = data;
+    } else {
+        this.data = data.fifowml.data[0].location;
+    }
+};
+ModelDailyWeather.prototype.setCallback = function (callback) {
+    this.callback = callback;
+};
+
+

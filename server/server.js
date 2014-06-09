@@ -10,7 +10,7 @@ var checking_update = require('child_process').fork(__dirname + '/../background/
 var app = express();
 
 // all environments
-app.set('port', config.port || process.env.PORT || 3000);
+app.set('port', config.port || process.env.PORT || 8080);
 app.set('views', __dirname + '/../views');
 app.set('view engine', template_enging);
 
@@ -33,6 +33,6 @@ config.routes.forEach(function (route) {
 		app[method](setting.path, routes[setting.value]);
 	});
 });
-app.listen(3000);
+app.listen(8080);
 console.log('server starts');
 checking_update.send('ready');
