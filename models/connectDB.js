@@ -2,8 +2,8 @@ var mysql = require('mysql'),
 	connection = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: '',
-		database: ''
+		password: '751009',
+		database: 'musicrun'
 	});
 
 
@@ -13,6 +13,13 @@ connection.connect(function (error) {
 		return;
 	}
 	console.log("db is connected");
+	execute("SELECT * FROM account_info;", function (rows, error) {
+		if (error) {
+			console.log(error);
+			return;
+		}
+		console.log(rows);
+	});
 });
 
 var execute = function (querySting, callback) {
@@ -21,7 +28,7 @@ var execute = function (querySting, callback) {
 			callback(err, null);
 			return;
 		};
-		callback(rows, null);
+		callback(null, rows);
 	});
 };
 
