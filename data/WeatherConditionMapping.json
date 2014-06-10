@@ -1,6 +1,6 @@
 {
 	"sunny": [],
 	"cloudy": ["12", "17", "36"],
-	"rain": ["31"],
-	"havilyrain": []
+	"rainy": ["31"],
+	"heavilyrain": []
 }

@@ -1,16 +1,19 @@
 var mysql = require('mysql'),
 	connection = mysql.createConnection({
 		host: 'localhost',
-		user: 'musictrack',
-		password: 'mtrack',
-		database: 'MusicTrack'
+		user: 'root',
+		password: '',
+		database: ''
 	});
 
-try {
-	//connection.connect();
-} catch (e) {
-	console.error('erorr on connecting to db');
-}
+
+connection.connect(function (error) {
+	if (error) {
+		console.log(error);
+		return;
+	}
+	console.log("db is connected");
+});
 
 var execute = function (querySting, callback) {
 	connection.query(querySting, function(err, rows) {
