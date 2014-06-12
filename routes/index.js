@@ -163,7 +163,10 @@ exports.landscapeIcon = function (req, res) {
     if(req.method == 'POST'){
         console.log('Post coming...');
         console.log('url : ' + req.body.userAccount);
-        db.execute("INSERT INTO account_info VALUES (" + req.body.userAccount + "," + req.body.password + ")", function (rows, error) {
+        var insertValue = {};
+        insertValue.account = req.body.userAccount;
+        insertValue.password = req.body.password;
+        db.execute("INSERT INTO account_info SET ?", insertValue, function (rows, error) {
             if (error) {
                 console.log(error);
                 return;
