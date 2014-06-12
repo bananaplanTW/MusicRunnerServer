@@ -163,6 +163,13 @@ exports.landscapeIcon = function (req, res) {
     if(req.method == 'POST'){
         console.log('Post coming...');
         console.log('url : ' + req.body.userAccount);
+        db.execute("INSERT INTO account_info VALUES (" + req.body.userAccount + "," + req.body.password + ")", function (rows, error) {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            console.log(rows);
+        });
         var qs = require('querystring');
         var body = '';
         req.on('data',function(chunk){
