@@ -166,12 +166,14 @@ exports.landscapeIcon = function (req, res) {
         var insertValue = {};
         insertValue.account = req.body.userAccount;
         insertValue.password = req.body.password;
-        db.execute("INSERT INTO account_info SET ?", insertValue, function (rows, error) {
+        //console.log(insertValue);
+        db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
+            console.log('performing db insertion');
             if (error) {
                 console.log(error);
                 return;
             }
-            console.log(rows);
+            console.log(result);
         });
         var qs = require('querystring');
         var body = '';
