@@ -37,6 +37,10 @@
 				{
 					"path" : "/store",
 					"value" : "store"
+				},
+				{
+					"path" : "/landscapeIcon",
+					"value" : "landscapeIcon"
 				}
 			]
 		}

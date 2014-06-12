@@ -160,6 +160,24 @@ exports.youBikeJSON = function (req, res) {
 };
 
 exports.landscapeIcon = function (req, res) {
+    if(req.method == 'POST'){
+        console.log('Post coming...');
+        console.log('url : ' + req.body.userAccount);
+        var qs = require('querystring');
+        var body = '';
+        req.on('data',function(chunk){
+            console.log('here...');
+            body += chunk;
+            console.log(body);
+        });
+        req.on('end', function () {
+            console.log('end here...');
+            console.log(qs.parse(body));
+        });
+    }
+    if(req.method == 'GET'){
+        console.log('GET coming');
+    }
     var data;
     console.log("retrieving landscape icon");
         var request = http.get('http://data.kaohsiung.gov.tw/Opendata/DownLoad.aspx?Type=2&CaseNo1=AV&CaseNo2=1&FileType=1&Lang=C&FolderType=', function (response) {
@@ -182,3 +200,4 @@ exports.landscapeIcon = function (req, res) {
     });
     request.end();
 };
+
