@@ -190,7 +190,6 @@ exports.register = function(req, res) {
     console.log('hitting register page...');
     if(req.method == 'POST'){
         console.log('Post coming...');
-        console.log('url : ' + req.body.userAccount);
         var insertValue = {};
         insertValue.account = req.body.userAccount;
         insertValue.password = req.body.password;
@@ -210,3 +209,43 @@ exports.register = function(req, res) {
     }
 };
 
+exports.login = function(req, res) {
+    console.log('hitting login page');
+    if(req.method == 'POST'){
+        var insertValue = {};
+        insertValue.account = req.body.userAccount;
+        insertValue.password = req.body.password;
+        //console.log(insertValue);
+        db.execute("SELECT  * FROM account_info WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+            console.log('performing db selection');
+            if (error) {
+                console.log(error);
+                res.send('fail to login');
+                return;
+            }
+            console.log(result);
+            if(Object.size(result) != 0){
+                console.log('found account');
+                console.log('password: ' + result[0].password);
+                returnedPassword = result[0].password;
+                if(returnedPassword == req.body.password){
+                    res.send('200');                    
+                } else {
+                    res.send('290');
+                }
+            } else {
+                res.send('299');
+                console.log('cannout find account');                 
+            }
+            
+        });
+    }
+};
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};

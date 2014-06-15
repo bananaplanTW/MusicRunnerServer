@@ -45,6 +45,10 @@
 				{
 					"path" : "/register",
 					"value" : "register"
+				},
+				{
+					"path" : "/login",
+					"value" : "login"
 				}
 			]
 		}
