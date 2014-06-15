@@ -160,33 +160,6 @@ exports.youBikeJSON = function (req, res) {
 };
 
 exports.landscapeIcon = function (req, res) {
-    if(req.method == 'POST'){
-        console.log('Post coming...');
-        console.log('url : ' + req.body.userAccount);
-        var insertValue = {};
-        insertValue.account = req.body.userAccount;
-        insertValue.password = req.body.password;
-        //console.log(insertValue);
-        db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
-            console.log('performing db insertion');
-            if (error) {
-                console.log(error);
-                return;
-            }
-            console.log(result);
-        });
-        var qs = require('querystring');
-        var body = '';
-        req.on('data',function(chunk){
-            console.log('here...');
-            body += chunk;
-            console.log(body);
-        });
-        req.on('end', function () {
-            console.log('end here...');
-            console.log(qs.parse(body));
-        });
-    }
     if(req.method == 'GET'){
         console.log('GET coming');
     }
@@ -211,5 +184,29 @@ exports.landscapeIcon = function (req, res) {
         console.log(e);
     });
     request.end();
+};
+
+exports.register = function(req, res) {
+    console.log('hitting register page...');
+    if(req.method == 'POST'){
+        console.log('Post coming...');
+        console.log('url : ' + req.body.userAccount);
+        var insertValue = {};
+        insertValue.account = req.body.userAccount;
+        insertValue.password = req.body.password;
+        //console.log(insertValue);
+        db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
+            console.log('performing db insertion');
+            if (error) {
+                console.log(error);
+                res.send('fail to register a new account');
+                return;
+            }
+            console.log(result);
+            res.send('register a new account successfully');
+        });
+        
+        
+    }
 };
 
