@@ -12,13 +12,6 @@ var weatherStore = require('../stores/weather');
 var youBikeStore = require('../stores/youbike');
 
 var db = require("../models/connectDB");
-db.execute("SELECT * FROM account_info;", function (rows, error) {
-                if (error) {
-                        console.log(error);
-                        return;
-                }
-                console.log(rows);
-        });
 
 exports.weather = function(req, res){
     var options = {
