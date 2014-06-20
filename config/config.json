@@ -49,6 +49,10 @@
 				{
 					"path" : "/login",
 					"value" : "login"
+				},
+				{
+					"path" : "/getMyStatus",
+					"value" : "getMyStatus"
 				}
 			]
 		}

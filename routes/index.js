@@ -191,11 +191,11 @@ exports.register = function(req, res) {
             console.log('performing db insertion');
             if (error) {
                 console.log(error);
-                res.send('fail to register a new account');
+                res.send('280');
                 return;
             }
             console.log(result);
-            res.send('register a new account successfully');
+            res.send('210');
         });
         
         
@@ -232,6 +232,32 @@ exports.login = function(req, res) {
             }
             
         });
+    }
+};
+
+exports.getMyStatus = function(req, res) {
+    console.log('hitting get my status page');
+    if(req.method == 'POST'){
+        var account = req.body.userAccount;
+        db.execute("SELECT  * FROM my_status WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+            console.log('performing db selection');
+            if (error) {
+                console.log(error);
+                res.send('fail to fetch my_status');
+                return;
+            }
+            console.log(result);
+            if(Object.size(result) != 0){
+                console.log('found my_status');
+                console.log('password: ' + result[0].password);
+                returnedPassword = result[0].password;
+                res.send('{ times : ' + result[0].times + ', speeds : ' +  result[0].speeds + ' , calories :  ' +  result[0].calories + ' , distance : ' +  result[0].distance + '}');
+            } else {
+                res.send('299');
+                console.log('cannout find status');                 
+            }
+            
+        });        
     }
 };
 
