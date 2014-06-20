@@ -251,7 +251,7 @@ exports.getMyStatus = function(req, res) {
                 console.log('found my_status');
                 console.log('password: ' + result[0].password);
                 returnedPassword = result[0].password;
-                res.send('{ times : ' + result[0].times + ', speeds : ' +  result[0].speeds + ' , calories :  ' +  result[0].calories + ' , distance : ' +  result[0].distance + '}');
+                res.send('{ "times" : ' + result[0].times + ', "speeds" : ' +  result[0].speeds + ' , "calories" :  ' +  result[0].calories + ' , "distance" : ' +  result[0].distance + '}');
             } else {
                 res.send('299');
                 console.log('cannout find status');                 
