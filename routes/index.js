@@ -194,7 +194,17 @@ exports.register = function(req, res) {
                 res.send('280');
                 return;
             }
-            console.log(result);
+            console.log('insert account info : ' + result);
+
+            db.execute("INSERT INTO my_status VALUES ('"+ req.body.userAccount + "',0,0,0,0)", function (error,result) {
+                console.log('performing db insertion');
+                if (error) {
+                    console.log(error);
+                    res.send('280');
+                    return;
+                }
+                console.log('insert my_status : ' + result);
+            });
             res.send('210');
         });
         
