@@ -6,6 +6,7 @@ var weatherMappingData = require('../data/weather.json');
 var weatherModel = require('../models/weather');
 var WeatherCollector = weatherModel.WeatherCollector;
 var cityMapping = weatherMappingData.cityMapping;
+var urls = require("../data/opendataUrls")
 
 var fs = require('fs');
 //var ff = new fs.createWriteStream('UV.json');
@@ -17,7 +18,6 @@ exports.get36HoursWeather = function (city, collector) {
         collector.isGetting36Hours = true;
         collector.emit('data', parsedWeather);
     } catch (e) {
-        var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml';
         var parseData = function (error, data) {
             if (error) {
                 //[TODO] error should be handled
@@ -37,7 +37,7 @@ exports.get36HoursWeather = function (city, collector) {
                 weather36hours.close();
             });
         };
-        api.getHttpResponse(url, parseData);
+        api.getHttpResponse(urls.t36hrs, parseData);
     }
 };
 
@@ -48,7 +48,6 @@ exports.getCityUV = function (city, collector) {
         collector.isGettingUV = true;
         collector.emit('data', UV);
     } catch (e) {
-        var url = 'http://opendata.cwb.gov.tw/opendata/DIV2/O-A0005-001.xml';
         var parseData = function (error, data) {
             if (error) {
                 //[TODO] error should be handled
@@ -66,7 +65,7 @@ exports.getCityUV = function (city, collector) {
                 uv.close();
             });
         };
-        api.getHttpResponse(url, parseData);
+        api.getHttpResponse(urls.uv, parseData);
     }  
 };
 
@@ -77,7 +76,6 @@ exports.getNext24HoursWeather = function (city, currentHour, collector) {
         collector.isGetting24Hours = true;
         collector.emit('data', next24Hours);
     } catch (e) {
-        var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml';
         var parseData = function (error, data) {
             if (error) {
                 //[TODO] error should be handled
@@ -95,7 +93,7 @@ exports.getNext24HoursWeather = function (city, currentHour, collector) {
                 weather36hours.close();
             });
         };
-        api.getHttpResponse(url, parseData);
+        api.getHttpResponse(urls.t36hrs, parseData);
     }
 };
 
@@ -106,7 +104,6 @@ exports.getWeekWeather = function (city, collector) {
         collector.isGettingWeekWeather = true;
         collector.emit('data', weekWeather);
     } catch (e) {
-        var url = 'http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-005.xml';
         var parseData = function (error, data) {
             if (error) {
                 //[TODO] error should be handled
@@ -124,7 +121,7 @@ exports.getWeekWeather = function (city, collector) {
                 weekWeatherJSON.close();
             });
         };
-        api.getHttpResponse(url, parseData);
+        api.getHttpResponse(urls.weekly, parseData);
     }
 }
 
