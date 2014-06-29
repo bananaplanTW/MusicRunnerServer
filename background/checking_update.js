@@ -48,7 +48,7 @@ var youbikeParseData = function (error, data) {
     var result = JSON.parse(data);
     var youbike = fs.createWriteStream(__dirname + '/../.cache/youbike.json');
     youbike.write(JSON.stringify(result.retVal));
-    youbike.close();
+    youbike.end();
     console.log('server updated youbike data');
 };
 
@@ -60,7 +60,7 @@ var t36hrsParseData = function (error, data) {
     parseString(data, function (error, result) {
         var weather36hours = fs.createWriteStream(__dirname + '/../.cache/weather36hours.json');
         weather36hours.write(JSON.stringify(result.fifowml.data[0].location));
-        weather36hours.close();
+        weather36hours.end();
         console.log('server updated weather36hour data');
     });
 };
@@ -73,7 +73,7 @@ var uvParseData = function (error, data) {
     parseString(data, function (error, result) {
         var uv = fs.createWriteStream(__dirname + '/../.cache/uv.json');
         uv.write(JSON.stringify(result.cwbopendata.dataset[0].weatherElement[0].location));
-        uv.close();
+        uv.end();
         console.log('server updated UV data');
     });
 };
@@ -86,7 +86,7 @@ var weeklyParseData = function (error, data) {
     parseString(data, function (error, result) {
         var weekWeather = fs.createWriteStream(__dirname + '/../.cache/weekWeather.json');
         weekWeather.write(JSON.stringify(result.fifowml.data[0].location));
-        weekWeather.close();
+        weekWeather.end();
         console.log('server updated weekWeather data');
     });
 };
