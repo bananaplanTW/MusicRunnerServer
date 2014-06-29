@@ -34,7 +34,7 @@ exports.get36HoursWeather = function (city, collector) {
 
                 var weather36hours = fs.createWriteStream(__dirname + '/../.cache/weather36hours.json');
                 weather36hours.write(JSON.stringify(result.fifowml.data[0].location));
-                weather36hours.close();
+                weather36hours.end();
             });
         };
         api.getHttpResponse(urls.t36hrs, parseData);
@@ -62,7 +62,7 @@ exports.getCityUV = function (city, collector) {
 
                 var uv = fs.createWriteStream(__dirname + '/../.cache/uv.json');
                 uv.write(JSON.stringify(result.cwbopendata.dataset[0].weatherElement[0].location));
-                uv.close();
+                uv.end();
             });
         };
         api.getHttpResponse(urls.uv, parseData);
@@ -90,7 +90,7 @@ exports.getNext24HoursWeather = function (city, currentHour, collector) {
 
                 var weather36hours = fs.createWriteStream(__dirname + '/../.cache/weather36hours.json');
                 weather36hours.write(JSON.stringify(result.fifowml.data[0].location));
-                weather36hours.close();
+                weather36hours.end();
             });
         };
         api.getHttpResponse(urls.t36hrs, parseData);
@@ -118,7 +118,7 @@ exports.getWeekWeather = function (city, collector) {
 
                 var weekWeatherJSON = fs.createWriteStream(__dirname + '/../.cache/weekWeather.json');
                 weekWeatherJSON.write(JSON.stringify(result.fifowml.data[0].location));
-                weekWeatherJSON.close();
+                weekWeatherJSON.end();
             });
         };
         api.getHttpResponse(urls.weekly, parseData);
