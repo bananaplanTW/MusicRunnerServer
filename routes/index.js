@@ -374,6 +374,29 @@ exports.getSettingInfo = function(req, res) {
     }
 };
 
+exports.updateSettings = function(req, res) {
+    console.log('hitting updateSettings page');
+    if(req.method == 'POST'){
+        var insertValue = {};
+        insertValue.account = req.body.userAccount;
+        insertValue.fullName = req.body.fullName;
+        insertValue.birthday = req.body.birthday;
+        insertValue.weightValue = req.body.weightValue;
+        insertValue.heightValue = req.body.heightValue;
+        //console.log(insertValue);
+        db.execute("UPDATE settings SET full_name = '"+ req.body.fullName +"', birthday = '" +  req.body.birthday + "', weight = '" + req.body.weightValue + "', height = '" + req.body.heightValue +  "' WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+            console.log('performing db udpate');
+            if (error) {
+                console.log(error);
+                res.send('fail to update');
+                return;
+            }
+            console.log(result);
+            res.send('220');                        
+        });
+    }
+};
+
 Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {
