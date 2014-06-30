@@ -345,6 +345,35 @@ exports.facebookLogin = function(req, res) {
     }
 };
 
+exports.getSettingInfo = function(req, res) {
+    console.log('hitting getSettingInfo page');
+    if(req.method == 'POST'){
+        var insertValue = {};
+        insertValue.account = req.body.userAccount;
+        insertValue.password = req.body.password;
+        //console.log(insertValue);
+        db.execute("SELECT  * FROM settings WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+            console.log('performing db selection');
+            if (error) {
+                console.log(error);
+                res.send('fail to login');
+                return;
+            }
+            console.log(result);
+            if(Object.size(result) != 0){
+                console.log('found account');
+                returnedPassword = result[0].password;
+                var jsonResult = "{'fullName' : '" + result[0].fullName + "' , 'birthday' : '" + result[0].birthday + "', 'weight' : '" + result[0].weight + "', 'height' : '" + result[0].height + "'}";
+                res.send(jsonResult);                    
+            } else {
+                res.send('603');
+                console.log('cannout find settings');                 
+            }
+            
+        });
+    }
+};
+
 Object.size = function(obj) {
     var size = 0, key;
     for (key in obj) {

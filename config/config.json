@@ -57,6 +57,10 @@
 				{
 					"path" : "/facebookLogin",
 					"value" : "facebookLogin"
+				},
+				{
+					"path" : "/getSettingInfo",
+					"value" : "getSettingInfo"
 				}
 			]
 		}
