@@ -363,7 +363,7 @@ exports.getSettingInfo = function(req, res) {
             if(Object.size(result) != 0){
                 console.log('found account');
                 returnedPassword = result[0].password;
-                var jsonResult = "{'fullName' : '" + result[0].fullName + "' , 'birthday' : '" + result[0].birthday + "', 'weight' : '" + result[0].weight + "', 'height' : '" + result[0].height + "'}";
+                var jsonResult = "{'fullName' : '" + result[0].full_name + "' , 'birthday' : '" + result[0].birthday + "', 'weight' : '" + result[0].weight + "', 'height' : '" + result[0].height + "'}";
                 res.send(jsonResult);                    
             } else {
                 res.send('603');
