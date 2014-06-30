@@ -187,39 +187,57 @@ exports.register = function(req, res) {
         insertValue.account = req.body.userAccount;
         insertValue.password = req.body.password;
         //console.log(insertValue);
-        db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
-            console.log('performing db insertion');
+
+        //check if this account exists first
+        db.execute("SELECT  * FROM account_info WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+            console.log('performing db selection in account_info');
             if (error) {
                 console.log(error);
-                res.send('280');
+                res.send('fail to login');
                 return;
             }
-            console.log('insert account info : ' + result);
+            console.log(result);
+            if(Object.size(result) != 0){
+                console.log('found account');
+                res.send('601');
+                return;                   
+            } else {
 
-            db.execute("INSERT INTO my_status VALUES ('"+ req.body.userAccount + "',0,0,0,0)", function (error,result) {
-                console.log('performing db insertion');
-                if (error) {
-                    console.log(error);
-                    res.send('280');
-                    return;
-                }
-                console.log('insert my_status : ' + result);
+                console.log("account not found, performing register");
 
-                db.execute("INSERT INTO settings VALUES ('"+ req.body.userAccount + "','Runner','01/01/2000','70','178')", function (error,result) {
-                    console.log('performing db insertion in settings');
+                db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
+                    console.log('performing db insertion');
                     if (error) {
                         console.log(error);
                         res.send('280');
                         return;
                     }
-                    console.log('insert settings : ' + result);
-                });
+                    console.log('insert account info : ' + result);
 
-            });
-            res.send('210');
-        });
-        
-        
+                    db.execute("INSERT INTO my_status VALUES ('"+ req.body.userAccount + "',0,0,0,0)", function (error,result) {
+                        console.log('performing db insertion');
+                        if (error) {
+                            console.log(error);
+                            res.send('280');
+                            return;
+                        }
+                        console.log('insert my_status : ' + result);
+
+                        db.execute("INSERT INTO settings VALUES ('"+ req.body.userAccount + "','Runner','01/01/2000','70','178')", function (error,result) {
+                            console.log('performing db insertion in settings');
+                            if (error) {
+                                console.log(error);
+                                res.send('280');
+                                return;
+                            }
+                            console.log('insert settings : ' + result);
+                        });
+
+                    });
+                    res.send('210');
+                });                
+            }
+        });        
     }
 };
 
