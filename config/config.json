@@ -53,6 +53,10 @@
 				{
 					"path" : "/getMyStatus",
 					"value" : "getMyStatus"
+				},
+				{
+					"path" : "/facebookLogin",
+					"value" : "facebookLogin"
 				}
 			]
 		}
