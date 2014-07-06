@@ -1,6 +1,6 @@
 var ModuleWeather = require("../modules/weather");
 var weatherModule = ModuleWeather.getInstance();
-weatherModule.updateData();
+weatherModule.setData();
 weatherModule.setObserver();
 
 exports.getDaily = function(cityCode, callback){

@@ -9,7 +9,7 @@ var ModuleWeather = (function () {
             setObserver: function () {
                 weather.setObserver();
             },
-            updateData: function () {
+            setData: function () {
                 weather.setData();
             },
             getDailyWeather: function (cityCode) {

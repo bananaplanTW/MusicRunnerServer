@@ -28,7 +28,7 @@ ModelWeather.prototype.setObserver = function () {
                             return;
                         }
                         console.log("weather36Hours has been changed, update");
-                        that.weekly = data;
+                        that.t36Hrs = data;
                     });
                     break;
                 case "weekWeather.json" :
