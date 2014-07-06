@@ -16,7 +16,7 @@ ModelWeather.prototype.setData = function () {
         this.weekly = require("../.cache/weekWeather");
         this.uv = require("../.cache/uv");
     } catch (e) {
-        
+        console.log(e);
     }
 };
 
