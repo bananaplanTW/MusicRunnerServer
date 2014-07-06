@@ -13,32 +13,8 @@ var youBikeStore = require('../stores/youbike');
 
 var db = require("../models/connectDB");
 
-exports.weather = function(req, res){
-    var options = {
-        hostname : "opendata.cwb.gov.tw",
-        path: "opendata/MFC/F-C0032-001.xml"
-    };
-    var data;
-    var request = http.get('http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml', function (response) {
-        console.log(response.statusCode);
-        var data_xml = "";
-        response.on('data', function (chunk) {
-            data_xml += chunk.toString();
-        });
-        response.on('end', function () {
-            parseString(data_xml, function (err, result) {
-                res.render('weather', {weatherData:result.fifowml.data[0]});
-            });
-        });
-    });
-    request.on('error', function (e) {
-        console.log(e);
-    });
-    request.end();
-};
-
-exports.weatherJSON = function(req, res){
-    weatherStore.get(req.query.cityCode, function (error, data) {
+exports.weatherDailyJSON = function(req, res){
+    weatherStore.getDaily(req.query.cityCode, function (error, data) {
         if (error) {
             res.writeHead(404);
             res.end();
@@ -52,8 +28,8 @@ exports.weatherJSON = function(req, res){
     });
 };
 
-exports.weatherWeekJSON = function(req, res){
-    weatherStore.getWeek(req.query.cityCode, function (error, data) {
+exports.weatherWeeklyJSON = function(req, res){
+    weatherStore.getWeekly(req.query.cityCode, function (error, data) {
         if (error) {
             res.writeHead(404);
             res.end();
@@ -100,29 +76,6 @@ exports.yweather = function (req, res) {
                 var jsonResult = JSON.stringify(result.rss.channel[0]);
                 res.render('yweather', {yweatherData:jsonResult});
             });
-        });
-    });
-    request.on('error', function (e) {
-        console.log(e);
-    });
-    request.end();
-};
-
-exports.youBike = function (req, res) {
-    var data;
-    var request = http.get('http://its.taipei.gov.tw/atis_index/data/youbike/youbike.json', function (response) {
-        console.log(response.statusCode);
-        var data_json = "";
-        response.on('data', function (chunk) {
-            data_json += chunk.toString();
-        });
-        response.on('end', function () {
-            /*parseString(data_xml, function (err, result) {
-                var jsonResult = JSON.stringify(result.rss.channel[0]);
-                res.render('yweather', {yweatherData:jsonResult});
-            });*/
-            data = JSON.parse(data_json);
-            res.render('youBike', {youBikeData: data.retVal});
         });
     });
     request.on('error', function (e) {

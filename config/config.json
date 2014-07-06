@@ -6,20 +6,16 @@
 			"method" : "get",
 		    "settings" : [
 				{
-					"path" : "/weatherJSON",
-					"value" : "weatherJSON"
+					"path" : "/weatherDailyJSON",
+					"value" : "weatherDailyJSON"
 				},
 				{
-					"path" : "/weatherWeekJSON",
-					"value" : "weatherWeekJSON"
+					"path" : "/weatherWeeklyJSON",
+					"value" : "weatherWeeklyJSON"
 				},
 				{
 					"path" : "/weather24HoursJSON",
 					"value" : "weather24HoursJSON"
-				},
-				{
-					"path" : "/youBike",
-					"value" : "youBike"
 				},
 				{
 					"path" : "/youBikeJSON",

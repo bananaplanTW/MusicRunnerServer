@@ -1,35 +1,41 @@
-var api = require("../lib/call_api.js");
-var ModelDailyWeather = require("../model/weather").ModelDailyWeather;
+var ModelWeather = require("../models/weather").ModelWeather;
 
-var ModuleGetRawWeather = function (_url, _cacheFilePath) {
-    var url = _url,
-        cacheFilePath = _cacheFilePath;
+var ModuleWeather = (function () {
+    var instance;
+
+    function getInstance () {
+        var weather = new ModelWeather();
+        return {
+            setObserver: function () {
+                weather.setObserver();
+            },
+            updateData: function () {
+                weather.setData();
+            },
+            getDailyWeather: function (cityCode) {
+                var code = cityCode || 0;
+                return weather.getDailyWeather(code);
+            },
+            getWeeklyWeather: function (cityCode) {
+                var code = cityCode || 0;
+                return weather.getWeeklyWeather(code);
+            },
+            get24HoursWeather: function (cityCode, currentHour) {
+                var code = cityCode || 0;
+                var hour = currentHour || (new Date()).getHours();
+                return weather.get24HoursWeather(code, hour);
+            }
+        };
+    }
 
     return {
-        getRawContent: function (error, model) {
-        	// if cache has the file
-        	try {
-        		var cacheFile = require(_cacheFilePath);
-        		model.setData(null, cacheFile, true);
-        	} catch(e) { // cache doesn't have the file
-        		api.getHttpResponse(url, model.setData);
-        	}
+        getInstance: function () {
+            if (typeof(instance) === "undefined") {
+                instance = getInstance();
+            }
+            return instance;
         }
     }
-};
+})();
 
-
-var ModuleGetDailyWeather = function (_cityCode) {
-	var url = "http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-001.xml",
-		cacheFilePath = "../.cache/weather36hours.json",
-		cityCode = _cityCode;
-	var moduleGetRawWeather = ModuleGetRawWeather(url, cacheFilePath);
-	var modelDailyWeather = Object.create(ModelDailyWeather);
-
-	return {
-		getJsonContent: function (callback) {
-			moduleGetRawWeather.getRawContent(error, ModelDailyWeather);
-		}
-	}
-}
-
+module.exports = ModuleWeather;
