@@ -11,9 +11,13 @@ var ModelWeather = function () {
 };
 
 ModelWeather.prototype.setData = function () {
-    this.t36Hrs = require("../.cache/weather36hours");
-    this.weekly = require("../.cache/weekWeather");
-    this.uv = require("../.cache/uv");
+    try {
+        this.t36Hrs = require("../.cache/weather36hours");
+        this.weekly = require("../.cache/weekWeather");
+        this.uv = require("../.cache/uv");
+    } catch (e) {
+        
+    }
 };
 
 ModelWeather.prototype.setObserver = function () {
