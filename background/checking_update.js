@@ -17,7 +17,7 @@ process.on('message', function (message) {
             api.getHttpResponse(urls.youbike, youbikeParseData);
         });
         console.log('server starts to update weather status in every hour');
-        timer.auto(ONE_HOUR, function(){
+        timer.auto(MINUTE, function(){
             api.getHttpResponse(urls.t36hrs, t36hrsParseData);
         });
         console.log('server starts to update UV status in every 6 hours');
