@@ -18,7 +18,7 @@ app.set('view engine', template_enging);
 
 app.engine(template_enging, cons.dust);
 app.use(express.favicon());
-app.use(express.logger({stream: logfile}));
+app.use(express.logger({stream: logfile, format: 'dev' }));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -36,5 +36,5 @@ config.routes.forEach(function (route) {
 	});
 });
 app.listen(8080);
-console.log('server starts');
+console.log('[server/server.js]: server starts');
 checking_update.send('ready');

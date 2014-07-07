@@ -30,6 +30,6 @@ exports.get24Hours = function(cityCode, currentHour, callback){
     if (t24HoursWeather) {
         callback(null, JSON.stringify(t24HoursWeather));
     } else {
-        callback({reason: "cannot get weekly weather"}, null);
+        callback({reason: "cannot get 24 hours weather"}, null);
     }
 };

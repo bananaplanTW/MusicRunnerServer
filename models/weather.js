@@ -16,7 +16,7 @@ ModelWeather.prototype.setData = function () {
         this.weekly = require("../.cache/weekWeather");
         this.uv = require("../.cache/uv");
     } catch (e) {
-        console.log(e);
+        console.error("[models/weather.js][error]: ", e);
     }
 };
 
@@ -28,30 +28,30 @@ ModelWeather.prototype.setObserver = function () {
                 case "weather36hours.json" : 
                     fileLib.readJSON(__dirname + "/../.cache/weather36hours.json", function (error, data) {
                         if (error) {
-                            console.log(error.reason);
+                            console.error("[models/weather.js][error]: " + error.reason);
                             return;
                         }
-                        console.log("weather36Hours has been changed, update");
+                        console.log("[models/weather.js]: weather36Hours has been changed, update");
                         that.t36Hrs = data;
                     });
                     break;
                 case "weekWeather.json" :
                     fileLib.readJSON(__dirname + "/../.cache/weekWeather.json", function (error, data) {
                         if (error) {
-                            console.log(error.reason);
+                            console.error("[models/weather.js][error]: " + error.reason);
                             return;
                         }
-                        console.log("weekWeather has been changed, update");
+                        console.log("[models/weather.js]: weekWeather has been changed, update");
                         that.weekly = data;
                     });
                     break;
                 case "uv.json" :
                     fileLib.readJSON(__dirname + "/../.cache/uv.json", function (error, data) {
                         if (error) {
-                            console.log(error.reason);
+                            console.error("[models/weather.js][error]: " + error.reason);
                             return;
                         }
-                        console.log("uv.json has been changed, update");
+                        console.log("[models/weather.js]: uv.json has been changed, update");
                         that.uv = data;
                     });
                     break;
@@ -107,6 +107,7 @@ ModelWeather.prototype.getWeeklyWeather = function (cityCode) {
             }
             if (typeof condIndex === 'undefined') {
                 condIndex = 'undefined value=' + weatherIndex + ' with string=' + forecast.text[0];
+                console.error("[models/weather.js][error]: " + condIndex);
             }
             forecastElement.condIndex = condIndex;
 
@@ -187,7 +188,7 @@ ModelWeather.prototype.get24HoursWeather = function (cityCode, currentHour) {
             }
             if (typeof condIndex === 'undefined') {
                 condIndex = 'undefined value=' + weatherIndex + ' with string=' + weatherElement.Wx[0].time[0].text[0];
-                console.log(condIndex);
+                console.error("[models/weather.js][error]: " + condIndex);
             }
 
             previousIndex  = currentIndex;

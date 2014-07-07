@@ -12,19 +12,19 @@ var ONE_HOUR = 60 * MINUTE;
 process.on('message', function (message) {
     if (message === 'ready') {
         initialize();
-        console.log('server starts to update youbike status in every 5 minutes');
+        console.log('[background/checkingUpdate.js]: server starts to update youbike status in every 5 minutes');
         timer.auto(FIVE_MINUTES, function(){
             api.getHttpResponse(urls.youbike, youbikeParseData);
         });
-        console.log('server starts to update weather status in every hour');
-        timer.auto(MINUTE, function(){
+        console.log('[background/checkingUpdate.js]: server starts to update weather status in every hour');
+        timer.auto(ONE_HOUR, function(){
             api.getHttpResponse(urls.t36hrs, t36hrsParseData);
         });
-        console.log('server starts to update UV status in every 6 hours');
+        console.log('[background/checkingUpdate.js]: server starts to update UV status in every 6 hours');
         timer.auto(6 * ONE_HOUR, function(){
             api.getHttpResponse(urls.uv, uvParseData);
         });
-        console.log('server starts to update weekly weather status in every hour');
+        console.log('[background/checkingUpdate.js]: server starts to update weekly weather status in every hour');
         timer.auto(ONE_HOUR, function(){
             api.getHttpResponse(urls.weekly, weeklyParseData);
         });
@@ -33,7 +33,7 @@ process.on('message', function (message) {
 
 
 function initialize () {
-    console.log("update data while server is restart");
+    console.log("[background/checkingUpdate.js]: update data while server is restart");
     api.getHttpResponse(urls.youbike, youbikeParseData);
     api.getHttpResponse(urls.t36hrs, t36hrsParseData);
     api.getHttpResponse(urls.uv, uvParseData);
@@ -49,7 +49,7 @@ var youbikeParseData = function (error, data) {
     var youbike = fs.createWriteStream(__dirname + '/../.cache/youbike.json');
     youbike.write(JSON.stringify(result.retVal));
     youbike.end();
-    console.log('server updated youbike data');
+    console.log("[background/checkingUpdate.js]: server updated youbike data");
 };
 
 var t36hrsParseData = function (error, data) {
@@ -61,7 +61,7 @@ var t36hrsParseData = function (error, data) {
         var weather36hours = fs.createWriteStream(__dirname + '/../.cache/weather36hours.json');
         weather36hours.write(JSON.stringify(result.fifowml.data[0].location));
         weather36hours.end();
-        console.log('server updated weather36hour data');
+        console.log('[background/checkingUpdate.js]: server updated weather36hour data');
     });
 };
 
@@ -74,7 +74,7 @@ var uvParseData = function (error, data) {
         var uv = fs.createWriteStream(__dirname + '/../.cache/uv.json');
         uv.write(JSON.stringify(result.cwbopendata.dataset[0].weatherElement[0].location));
         uv.end();
-        console.log('server updated UV data');
+        console.log('[background/checkingUpdate.js]: server updated UV data');
     });
 };
 
@@ -87,6 +87,6 @@ var weeklyParseData = function (error, data) {
         var weekWeather = fs.createWriteStream(__dirname + '/../.cache/weekWeather.json');
         weekWeather.write(JSON.stringify(result.fifowml.data[0].location));
         weekWeather.end();
-        console.log('server updated weekWeather data');
+        console.log('[background/checkingUpdate.js]: server updated weekWeather data');
     });
 };
