@@ -1,68 +1,80 @@
 {
-	"port" : 3000,
-	"template-engine" : "dust",
-	"routes" : [
-		{
-			"method" : "get",
-		    "settings" : [
-				{
-					"path" : "/weatherDailyJSON",
-					"value" : "weatherDailyJSON"
-				},
-				{
-					"path" : "/weatherWeeklyJSON",
-					"value" : "weatherWeeklyJSON"
-				},
-				{
-					"path" : "/weather24HoursJSON",
-					"value" : "weather24HoursJSON"
-				},
-				{
-					"path" : "/youBikeJSON",
-					"value" : "youBikeJSON"
-				},
-				{
-					"path" : "/landscapeIcon",
-					"value" : "landscapeIcon"
-				}
-			]
-		},
-		{
-			"method" : "post",
-			"settings" : [
-				{
-					"path" : "/store",
-					"value" : "store"
-				},
-				{
-					"path" : "/landscapeIcon",
-					"value" : "landscapeIcon"
-				},
-				{
-					"path" : "/register",
-					"value" : "register"
-				},
-				{
-					"path" : "/login",
-					"value" : "login"
-				},
-				{
-					"path" : "/getMyStatus",
-					"value" : "getMyStatus"
-				},
-				{
-					"path" : "/facebookLogin",
-					"value" : "facebookLogin"
-				},
-				{
-					"path" : "/getSettingInfo",
-					"value" : "getSettingInfo"
-				},
-				{
-					"path" : "/updateSettings",
-					"value" : "updateSettings"
-				}
-			]
-		}
-	]
+    "port" : 3000,
+    "template-engine" : "dust",
+    "routes" : [
+        {
+            "method" : "get",
+            "settings" : [
+                {
+                    "path" : "/getWeatherConditions",
+                    "value" : "getWeatherConditions"
+                },
+                {
+                    "path" : "/getWeatherHourly",
+                    "value" : "getWeatherHourly"
+                },
+                {
+                    "path" : "/getWeatherForecast5Day",
+                    "value" : "getWeatherForecast5Day"
+                },
+                {
+                    "path" : "/weatherDailyJSON",
+                    "value" : "weatherDailyJSON"
+                },
+                {
+                    "path" : "/weatherWeeklyJSON",
+                    "value" : "weatherWeeklyJSON"
+                },
+                {
+                    "path" : "/weather24HoursJSON",
+                    "value" : "weather24HoursJSON"
+                },
+                {
+                    "path" : "/youBikeJSON",
+                    "value" : "youBikeJSON"
+                },
+                {
+                    "path" : "/landscapeIcon",
+                    "value" : "landscapeIcon"
+                }
+            ]
+        },
+        {
+            "method" : "post",
+            "settings" : [
+                {
+                    "path" : "/store",
+                    "value" : "store"
+                },
+                {
+                    "path" : "/landscapeIcon",
+                    "value" : "landscapeIcon"
+                },
+                {
+                    "path" : "/register",
+                    "value" : "register"
+                },
+                {
+                    "path" : "/login",
+                    "value" : "login"
+                },
+                {
+                    "path" : "/getMyStatus",
+                    "value" : "getMyStatus"
+                },
+                {
+                    "path" : "/facebookLogin",
+                    "value" : "facebookLogin"
+                },
+                {
+                    "path" : "/getSettingInfo",
+                    "value" : "getSettingInfo"
+                },
+                {
+                    "path" : "/updateSettings",
+                    "value" : "updateSettings"
+                }
+            ]
+        }
+    ]
 }

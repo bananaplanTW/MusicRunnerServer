@@ -7,7 +7,7 @@ var express = require('express'),
     template_enging = config['template-engine'],
     cons = require('consolidate');
 var logfile = fs.createWriteStream('./musicserver.log', {flags: 'a'});
-var checking_update = require('child_process').fork(__dirname + '/../background/checking_update.js');
+//var checking_update = require('child_process').fork(__dirname + '/../background/checking_update.js');
 var app = express();
 
 
@@ -18,7 +18,7 @@ app.set('view engine', template_enging);
 
 app.engine(template_enging, cons.dust);
 app.use(express.favicon());
-app.use(express.logger({stream: logfile, format: 'dev' }));
+//app.use(express.logger({stream: logfile, format: 'dev' }));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -37,4 +37,4 @@ config.routes.forEach(function (route) {
 });
 app.listen(8080);
 console.log('[server/server.js]: server starts');
-checking_update.send('ready');
+//checking_update.send('ready');

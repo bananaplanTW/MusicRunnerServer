@@ -59,6 +59,54 @@ exports.weather24HoursJSON = function(req, res){
     });
 };
 
+exports.getWeatherConditions = function (req, res) {
+    var query = req.query;
+    weatherStore.getWeatherConditions(query.city, query.country, function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
+        });
+        res.write(data);
+        res.end();
+    });
+};
+
+exports.getWeatherHourly = function (req, res) {
+    var query = req.query;
+    weatherStore.getWeatherHourly(query.city, query.country, function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
+        });
+        res.write(data);
+        res.end();
+    });
+};
+
+exports.getWeatherForecast5Day = function (req, res) {
+    var query = req.query;
+    weatherStore.getWeatherForecast5Day(query.city, query.country, function (error, data) {
+        if (error) {
+            res.writeHead(404);
+            res.end();
+            return;
+        }
+        res.writeHead(200, {
+            'Content-Type': 'text/json'
+        });
+        res.write(data);
+        res.end();
+    });
+};
+
 exports.yweather = function (req, res) {
     var options = {
         hostname : "weather.yahooapis.com/forecastrss",

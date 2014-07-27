@@ -4,6 +4,5 @@
     "uv": "http://opendata.cwb.gov.tw/opendata/DIV2/O-A0005-001.xml",
     "weekly": "http://opendata.cwb.gov.tw/opendata/MFC/F-C0032-005.xml",
     "yahooWeather": "http://weather.yahooapis.com/forecastrss",
-    "WeatherUnderground": "http://api.wunderground.com/api/%s/conditions/q/%s/%s.json",
-    "WeatherDailyCacne": "/../.cache/%s_%s_daily.json"
+    "WeatherUndergroundApi": "http://api.wunderground.com/api/%s/%s/q/%s/%s.json"
 }

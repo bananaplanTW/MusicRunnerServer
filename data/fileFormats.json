@@ -1,0 +1,5 @@
+{
+    "WeatherConditionsCache": "/../.cache/%s_%s_conditions.json",
+    "WeatherHourlyCache": "/../.cache/%s_%s_hourly.json",
+    "WeatherForecast10DayCache": "/../.cache/%s_%s_forecast10day.json"
+}
