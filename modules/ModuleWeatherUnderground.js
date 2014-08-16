@@ -26,6 +26,7 @@ var ModuleWeatherUnderground = (function () {
                     returnData.wind_kph = curObser.wind_kph;
                     returnData.icon = curObser.icon;
                     returnData.icon_url = curObser.icon_url;
+                    returnData.condition = curObser.weather;
 
                     callback(null, returnData);
                 });
