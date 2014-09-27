@@ -1,6 +1,7 @@
 var ModelBase = require("./ModelBase"),
     urls = require('../data/opendataUrls'),
     files = require('../data/fileFormats'),
+    errorLog = require('../lib/logger').errorLog,
     util = require('util');
 var uweatherkey = "";
 
@@ -46,8 +47,8 @@ ModelWeatherUnderground.prototype.getWeatherData = function (city, country, apiT
             var weatherApiUrl = util.format(urls.WeatherUndergroundApi, uweatherkey, apiType, country, city);
             that.HTTPGet(weatherApiUrl, function (error, data) {
                 if (error) {
-                    console.log("[models/ModelWeatherUnderground.js][error]: with filepath=" + filepath);
-                    console.log(error);
+                    errorLog.error("[models/ModelWeatherUnderground.js]: with filepath=" + filepath);
+                    errorLog.error(error);
                     callback(error, null);
                     return;
                 }

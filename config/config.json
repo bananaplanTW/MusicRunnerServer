@@ -36,6 +36,10 @@
                 {
                     "path" : "/landscapeIcon",
                     "value" : "landscapeIcon"
+                },
+                {
+                    "path" : "/getTrackInfo",
+                    "value" : "getTrackInfoPage"
                 }
             ]
         },
@@ -73,6 +77,10 @@
                 {
                     "path" : "/updateSettings",
                     "value" : "updateSettings"
+                },
+                {
+                    "path" : "/getTrackInfo",
+                    "value" : "getTrackInfo"
                 }
             ]
         }

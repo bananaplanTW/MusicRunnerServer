@@ -10,9 +10,14 @@ var parseString = parser.parseString;
 var handleUsers = require('../stores/users');
 var weatherStore = require('../stores/weather');
 var youBikeStore = require('../stores/youbike');
+var trackInfoStore = require('../stores/TrackInfo');
 
 var db = require("../models/connectDB");
 
+/*
+  - Weather Underground API
+  - Author : ktlee
+*/
 exports.weatherDailyJSON = function(req, res){
     weatherStore.getDaily(req.query.cityCode, function (error, data) {
         if (error) {
@@ -105,6 +110,28 @@ exports.getWeatherForecast5Day = function (req, res) {
         res.write(data);
         res.end();
     });
+};
+
+exports.getTrackInfo = function (req, res) {
+    var body = req.body;
+    if(body.trackList) {
+        trackInfoStore.getTrackInfo(body.trackList, function (error, data) {
+            if (error) {
+                res.writeHead(404);
+                res.end();
+                return;
+            }
+            res.writeHead(200, {
+                'Content-Type': 'text/json'
+            });
+            res.write(data);
+            res.end();
+        });
+    }
+};
+
+exports.getTrackInfoPage = function (req, res) {
+    res.render("trackInfo");
 };
 
 exports.yweather = function (req, res) {

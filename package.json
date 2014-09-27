@@ -15,6 +15,7 @@
     "musicmetadata": "*",
     "xml2js": "*",
     "mysql" : "*",
-    "timer" : "*"
+    "timer" : "*",
+    "log"   : "*"
   }
 }
