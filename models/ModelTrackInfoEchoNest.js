@@ -2,7 +2,7 @@ var ModelBase = require("./ModelBase"),
     urls = require("../data/opendataUrls"),
     util = require('util'),
     errorLog = require('../lib/logger').errorLog,
-    echoNestKey = "";
+    echoNestKey = process.env.ECHONESTKEY;
 
 var ModelTrackInfoEchoNest = function () {
 

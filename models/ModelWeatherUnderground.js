@@ -3,7 +3,7 @@ var ModelBase = require("./ModelBase"),
     files = require('../data/fileFormats'),
     errorLog = require('../lib/logger').errorLog,
     util = require('util');
-var uweatherkey = "";
+var uweatherkey = process.env.WEATHERUNKEY;
 
 var ModelWeatherUnderground = function () {
     this.apiTypeConditions    = "conditions";
