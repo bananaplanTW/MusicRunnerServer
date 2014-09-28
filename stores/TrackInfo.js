@@ -9,9 +9,9 @@ exports.getTrackInfo = function (songList, callback) {
 			if (error) {
 				errorLog.error("[stores/TrackInfo.js][Error] cannot getting track info");
 				errorLog.error(error);
-				song.tempo = -2;
+				song.bpm = -2;
 			} else {
-				song.tempo = data.tempo;
+				song.bpm = data.bpm;
 			}
 
 			if (length == 0) {

@@ -14,9 +14,9 @@ var ModuleTrackInfoEchoNest = (function () {
     				var trackInfo = data.response.songs[0];
     				var result = {};
     				try {
-	    				result.tempo = trackInfo.audio_summary.tempo;
+	    				result.bpm = trackInfo.audio_summary.tempo;
 	    			} catch (e) {
-	    				result.tempo = -1;
+	    				result.bpm = -1;
 	    			}
     				callback(null, result);
     				return
