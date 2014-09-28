@@ -10,11 +10,12 @@ exports.getTrackInfo = function (songList, callback) {
 				errorLog.error("[stores/TrackInfo.js][Error] cannot getting track info");
 				errorLog.error(error);
 				song.tempo = -2;
+			} else {
+				song.tempo = data.tempo;
 			}
-			song.tempo = data.tempo;
 
 			if (length == 0) {
-				callback(null, songList);
+				callback(null, JSON.stringify(songList));
 				return
 			}
 		});

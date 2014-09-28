@@ -5,7 +5,8 @@ var express = require('express'),
     dust_engine = require('dustjs-linkedin'),
     config = require('../config/config'),
     template_engine = config['template-engine'],
-    cons = require('consolidate');
+    cons = require('consolidate'),
+    bodyParser = require('body-parser');
 var httpLogFile  = fs.createWriteStream('./logs/http.log', {flags: 'a'});
 //var checking_update = require('child_process').fork(__dirname + '/../background/checking_update.js');
 var app = express();
@@ -19,7 +20,8 @@ app.set('view engine', template_engine);
 app.engine(template_engine, cons.dust);
 app.use(express.favicon());
 app.use(express.logger({stream: httpLogFile}));
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
+app.use(bodyParser.json());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));

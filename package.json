@@ -16,6 +16,7 @@
     "xml2js": "*",
     "mysql" : "*",
     "timer" : "*",
-    "log"   : "*"
+    "log"   : "*",
+    "body-parser" : "*"
   }
 }
