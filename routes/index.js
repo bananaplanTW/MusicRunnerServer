@@ -221,7 +221,7 @@ exports.register = function(req, res) {
             console.log('performing db selection in account_info');
             if (error) {
                 console.log(error);
-                res.send('fail to login');
+                res.send('fail to register, please check your account and password');
                 return;
             }
             console.log(result);

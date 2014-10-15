@@ -22,6 +22,7 @@ app.use(express.favicon());
 app.use(express.logger({stream: httpLogFile}));
 //app.use(express.bodyParser());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
