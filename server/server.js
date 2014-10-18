@@ -6,11 +6,20 @@ var express = require('express'),
     config = require('../config/config'),
     template_engine = config['template-engine'],
     cons = require('consolidate'),
-    bodyParser = require('body-parser');
-var httpLogFile  = fs.createWriteStream('./logs/http.log', {flags: 'a'});
+    logger = require('../lib/logger'),
+    bodyParser = require('body-parser'),
+    httpLogFile;
 //var checking_update = require('child_process').fork(__dirname + '/../background/checking_update.js');
 var app = express();
 
+logger.createLogsDir(function (error, status) {
+    if (error) {
+        console.error("[server/server.js]: cannot create httplogs file");
+        throw error;
+        return;
+    }
+    httpLogFile = fs.createWriteStream('./logs/http.log', {flags: 'a'});
+});
 
 // all environments
 app.set('port', config.port || process.env.PORT || 8080);

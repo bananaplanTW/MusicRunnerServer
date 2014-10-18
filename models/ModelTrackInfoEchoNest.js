@@ -14,6 +14,7 @@ ModelTrackInfoEchoNest.prototype.getTrackInfo = function(artist, title, callback
 	this.HTTPGet(echoNestUrl, function (error, data) {
 		if (error) {
 			errorLog.error("[models/ModelTrackInfoEchoNest.js]: errors when calling EchoNest");
+			errorLog.error("echoNestUrl = " + echoNestUrl);
             errorLog.error(error);
             callback(error, null);
             return;
