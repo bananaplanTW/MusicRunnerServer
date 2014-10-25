@@ -241,7 +241,7 @@ exports.register = function(req, res) {
                         return;
                     }
                     console.log('insert account info : ' + result);
-
+                    /*
                     db.execute("INSERT INTO my_status VALUES ('"+ req.body.userAccount + "',0,0,0,0)", function (error,result) {
                         console.log('performing db insertion');
                         if (error) {
@@ -249,7 +249,7 @@ exports.register = function(req, res) {
                             res.send('280');
                             return;
                         }
-                        console.log('insert my_status : ' + result);
+                        //console.log('insert my_status : ' + result);
 
                         db.execute("INSERT INTO settings VALUES ('"+ req.body.userAccount + "','Runner','01/01/2000','70','178')", function (error,result) {
                             console.log('performing db insertion in settings');
@@ -262,6 +262,16 @@ exports.register = function(req, res) {
                         });
 
                     });
+                    */
+                    db.execute("INSERT INTO settings VALUES ('"+ req.body.userAccount + "','70','180','1/1/1986','1','10','chinese','cm','km','speed','c')", function (error,result) {
+                        console.log('performing db insertion in settings');
+                        if (error) {
+                            console.log(error);
+                            res.send('280');
+                            return;
+                        }
+                        console.log('insert settings : ' + result);
+                    });                    
                     res.send('210');
                 });                
             }
