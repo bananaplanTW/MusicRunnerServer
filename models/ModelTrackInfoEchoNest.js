@@ -16,6 +16,7 @@ ModelTrackInfoEchoNest.prototype.getTrackInfo = function(artist, title, callback
 			errorLog.error("[models/ModelTrackInfoEchoNest.js]: errors when calling EchoNest");
 			errorLog.error("echoNestUrl = " + echoNestUrl);
             errorLog.error(error);
+            errorLog.error(data);
             callback(error, null);
             return;
 		}
