@@ -3,7 +3,7 @@ var moduleTrackInfoEchoNest = require('../modules/ModuleTrackInfoEchoNest').getI
 
 exports.getTrackInfo = function (songList, callback) {
 	var length = songList.length;
-	songList.forEach(function (song) {
+	/*songList.forEach(function (song) {
 		moduleTrackInfoEchoNest.getTrackInfo(song.artist, song.title, function (error, data) {
 			length--;
 			if (error) {
@@ -19,7 +19,7 @@ exports.getTrackInfo = function (songList, callback) {
 				return
 			}
 		});
-	});
+	});*/
 
 
 	function getTrackInfo (index) {
