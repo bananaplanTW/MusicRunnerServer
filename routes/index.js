@@ -357,7 +357,7 @@ exports.facebookLogin = function(req, res) {
                 res.send('200');                    
             } else {
                 //cannot find facebook account means this is the first time to use this facebook account to login
-                db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','facebook')", function (error,result) {
+                db.execute("INSERT INTO account_info(account, password) VALUES ('"+ req.body.userAccount + "','facebook')", function (error,result) {
                     console.log('performing db insertion');
                     if (error) {
                         console.log(error);
@@ -366,7 +366,7 @@ exports.facebookLogin = function(req, res) {
                     }
                     console.log('insert account_info : ' + result);
 
-                    db.execute("INSERT INTO settings VALUES ('"+ req.body.userAccount + "','Runner','01/01/2000','70','178')", function (error,result) {
+                    db.execute("INSERT INTO settings(account, weight, height, birth_date, auto_cue_flag, auto_cue_period, language, height_unit, length_unit, display, temperature_unit) VALUES ('"+ req.body.userAccount + "','Runner','01/01/2000','70','178')", function (error,result) {
                         console.log('performing db insertion in settings');
                         if (error) {
                             console.log(error);
