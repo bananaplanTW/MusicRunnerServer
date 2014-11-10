@@ -233,7 +233,7 @@ exports.register = function(req, res) {
 
                 console.log("account not found, performing register");
 
-                db.execute("INSERT INTO account_info VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
+                db.execute("INSERT INTO account_info(account, password) VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
                     console.log('performing db insertion');
                     if (error) {
                         console.log(error);
@@ -263,7 +263,7 @@ exports.register = function(req, res) {
 
                     });
                     */
-                    db.execute("INSERT INTO settings VALUES ('"+ req.body.userAccount + "','70','180','1/1/1986','1','10','chinese','cm','km','speed','c')", function (error,result) {
+                    db.execute("INSERT INTO settings(account, weight, height, birth_date, auto_cue_flag, auto_cue_period, language, height_unit, length_unit, display, temperature_unit) VALUES ('"+ req.body.userAccount + "','70','180','1/1/1986','1','10','chinese','cm','km','speed','c')", function (error,result) {
                         console.log('performing db insertion in settings');
                         if (error) {
                             console.log(error);
