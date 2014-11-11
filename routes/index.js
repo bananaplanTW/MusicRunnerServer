@@ -11,6 +11,7 @@ var handleUsers = require('../stores/users');
 var weatherStore = require('../stores/weather');
 var youBikeStore = require('../stores/youbike');
 var trackInfoStore = require('../stores/TrackInfo');
+var bcrypt = require('bcryptjs');
 
 var db = require("../models/connectDB");
 
@@ -232,8 +233,10 @@ exports.register = function(req, res) {
             } else {
 
                 console.log("account not found, performing register");
+                var salt = bcrypt.genSaltSync(10);
+                var hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
-                db.execute("INSERT INTO account_info(account, password) VALUES ('"+ req.body.userAccount + "','" + req.body.password + "')", function (error,result) {
+                db.execute("INSERT INTO account_info(account, password, salt) VALUES ('"+ req.body.userAccount + "','" + hashedPassword + "','" + salt + "')", function (error,result) {
                     console.log('performing db insertion');
                     if (error) {
                         console.log(error);
@@ -298,7 +301,10 @@ exports.login = function(req, res) {
                 console.log('found account');
                 console.log('password: ' + result[0].password);
                 returnedPassword = result[0].password;
-                if(returnedPassword == req.body.password){
+                var salt = result[0].salt;
+                var validPassword = bcrypt.compareSync(req.body.password, returnedPassword);
+                //if(returnedPassword == req.body.password){
+                if(validPassword == true){
                     res.send('200');                    
                 } else {
                     res.send('290');
