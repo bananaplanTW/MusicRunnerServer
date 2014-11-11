@@ -236,7 +236,7 @@ exports.register = function(req, res) {
                 var salt = bcrypt.genSaltSync(10);
                 var hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
-                db.execute("INSERT INTO account_info(account, password, salt) VALUES ('"+ req.body.userAccount + "','" + hashedPassword + "','" + salt + "')", function (error,result) {
+                db.execute("INSERT INTO account_info(account, password, salt, account_type) VALUES ('"+ req.body.userAccount + "','" + hashedPassword + "','" + salt + "','email')", function (error,result) {
                     console.log('performing db insertion');
                     if (error) {
                         console.log(error);
@@ -363,7 +363,7 @@ exports.facebookLogin = function(req, res) {
                 res.send('200');                    
             } else {
                 //cannot find facebook account means this is the first time to use this facebook account to login
-                db.execute("INSERT INTO account_info(account, password) VALUES ('"+ req.body.userAccount + "','facebook')", function (error,result) {
+                db.execute("INSERT INTO account_info(account, password, account_type) VALUES ('"+ req.body.userAccount + "','facebook','facebook')", function (error,result) {
                     console.log('performing db insertion');
                     if (error) {
                         console.log(error);
