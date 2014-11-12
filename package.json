@@ -17,6 +17,7 @@
     "mysql" : "*",
     "timer" : "*",
     "log"   : "*",
-    "body-parser" : "*"
+    "body-parser" : "*",
+    "bcryptjs": "*"
   }
 }

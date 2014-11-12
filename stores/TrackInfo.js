@@ -5,7 +5,7 @@ exports.getTrackInfo = function (songList, callback) {
 	var length = songList.length;
 	function getTrackInfo (index) {
 		var song = songList[index];
-		moduleTrackInfoEchoNest.getTrackInfo(song.artist, song.title, function (error, data) {
+		moduleTrackInfoEchoNest.getTrackInfo(song.artist, song.title, song.genre, function (error, data) {
 			length--;
 			if (error) {
 				errorLog.error("[stores/TrackInfo.js][Error] cannot getting track info");
@@ -33,3 +33,4 @@ exports.getTrackInfo = function (songList, callback) {
 		callback(null, JSON.stringify(songList));
 	}
 };
+
