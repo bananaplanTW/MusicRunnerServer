@@ -318,6 +318,35 @@ exports.login = function(req, res) {
     }
 };
 
+exports.getFullName = function(req, res) {
+    console.log('hitting getFullName page');
+    if(req.method == 'POST'){
+        var insertValue = {};
+        insertValue.account = req.body.userAccount;
+        //console.log(insertValue);
+        db.execute("SELECT  * FROM settings WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+            console.log('performing db selection');
+            if (error) {
+                console.log(error);
+                res.send('fail to look up full name');
+                return;
+            }
+            console.log(result);
+            if(Object.size(result) != 0){
+                console.log('found account');
+                var firstName = result[0].first_name;
+                var lastName = result[0].last_name;
+                res.send(firstName + ' ' + lastName);
+            } else {
+                res.send('299');
+                console.log('cannout find account');                 
+            }
+            
+        });
+    }
+};
+
+
 exports.getMyStatus = function(req, res) {
     console.log('hitting get my status page');
     if(req.method == 'POST'){

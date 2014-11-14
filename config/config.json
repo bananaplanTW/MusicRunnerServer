@@ -69,6 +69,10 @@
                 {
                     "path" : "/getTrackInfo",
                     "value" : "getTrackInfo"
+                },
+                {
+                    "path" : "/getFullName",
+                    "value" : "getFullName"
                 }
             ]
         }
