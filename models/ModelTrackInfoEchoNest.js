@@ -37,7 +37,8 @@ var insertSongIntoDB = function (data, callback) {
 };
 
 var getTrackInfoFromEchoNest = function (artist, title, genre, callback) {
-	var echoNestUrl = util.format(urls.EchoNestTrackApi, echoNestKey, encodeURIComponent(artist), encodeURIComponent(title));
+	var echoNestUrl = util.format(urls.EchoNestTrackApi, echoNestKey, artist, title);
+console.log(echoNestUrl);
 	this.HTTPGet(echoNestUrl, function (error, data) {
 		if (error) {
 			errorLog.error("[models/ModelTrackInfoEchoNest.js]: errors when calling EchoNest");
