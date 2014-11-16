@@ -266,7 +266,7 @@ exports.register = function(req, res) {
 
                     });
                     */
-                    db.execute("INSERT INTO settings(account, weight, height, birth_date, auto_cue_flag, auto_cue_period, language, height_unit, length_unit, display, temperature_unit, first_name, last_name) VALUES ('"+ req.body.userAccount + "','70','180','1/1/1986','1','10','chinese','cm','km','speed','c','" + req.body.firstName + "','" + req.body.lastName + "')", function (error,result) {
+                    db.execute("INSERT INTO settings(account, weight, height, birth_date, auto_cue_flag, auto_cue_period, language, height_unit, length_unit, display, temperature_unit, first_name, last_name,gender) VALUES ('"+ req.body.userAccount + "','70','180','1/1/1986','1','10','chinese','cm','km','speed','c','" + req.body.firstName + "','" + req.body.lastName + "','male')", function (error,result) {
                         console.log('performing db insertion in settings');
                         if (error) {
                             console.log(error);
@@ -401,7 +401,7 @@ exports.facebookLogin = function(req, res) {
                     }
                     console.log('insert account_info : ' + result);
 
-                    db.execute("INSERT INTO settings(account, weight, height, birth_date, auto_cue_flag, auto_cue_period, language, height_unit, length_unit, display, temperature_unit) VALUES ('"+ req.body.userAccount + "','Runner','01/01/2000','70','178')", function (error,result) {
+                    db.execute("INSERT INTO settings(account, weight, height, birth_date, auto_cue_flag, auto_cue_period, language, height_unit, length_unit, display, temperature_unit, first_name, last_name, gender) VALUES ('"+ req.body.userAccount + "','70','180','1/1/1986','1','10','chinese','cm','km','speed','c','" + req.body.firstName + "','" + req.body.lastName + "','"+req.body.gender + "')", function (error,result) {
                         console.log('performing db insertion in settings');
                         if (error) {
                             console.log(error);
