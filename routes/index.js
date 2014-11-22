@@ -457,7 +457,7 @@ exports.updateSettings = function(req, res) {
         insertValue.weightValue = req.body.weightValue;
         insertValue.heightValue = req.body.heightValue;
         //console.log(insertValue);
-        db.execute("UPDATE settings SET full_name = '"+ req.body.fullName +"', birthday = '" +  req.body.birthday + "', weight = '" + req.body.weightValue + "', height = '" + req.body.heightValue +  "' WHERE account = '" + req.body.userAccount +"'", function (error,result) {
+        db.execute("UPDATE settings SET language = '" + req.body.language + "', auto_cue_flag = '" + req.body.autoCueToggle + "', auto_cue_period = '" + req.body.autoCue + "', temperature_unit = '" + req.body.unitDegree + "', display = '" + req.body.unitSpeedPace + "', height_unit = '" + req.body.unitHeight + "', length_unit = '" + req.body.unitDistance + "', weight_unit = '" + req.body.unitWeight + "', birth_date = '" +  req.body.birthday + "', weight = '" + req.body.weightValue + "', height = '" + req.body.heightValue +  "' WHERE account = '" + req.body.userAccount +"'", function (error,result) {
             console.log('performing db udpate');
             if (error) {
                 console.log(error);
