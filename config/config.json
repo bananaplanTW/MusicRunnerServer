@@ -73,6 +73,10 @@
                 {
                     "path" : "/getFullName",
                     "value" : "getFullName"
+                },
+                {
+                    "path" : "/insertRouteInfo",
+                    "value" : "insertRouteInfo"
                 }
             ]
         }

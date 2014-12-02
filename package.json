@@ -12,6 +12,7 @@
     "consolidate": "*",
     "less-middleware": "*",
     "mongoose": "*",
+    "mongodb": "*",
     "musicmetadata": "*",
     "xml2js": "*",
     "mysql" : "*",

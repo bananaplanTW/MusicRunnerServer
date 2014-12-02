@@ -11,6 +11,7 @@ var handleUsers = require('../stores/users');
 var weatherStore = require('../stores/weather');
 var youBikeStore = require('../stores/youbike');
 var trackInfoStore = require('../stores/TrackInfo');
+var routeInfoStore = require('../stores/RouteInfo');
 var bcrypt = require('bcryptjs');
 
 var db = require("../models/connectDB");
@@ -117,6 +118,24 @@ exports.getTrackInfo = function (req, res) {
     var body = req.body;
     if(body.trackList) {
         trackInfoStore.getTrackInfo(body.trackList, function (error, data) {
+            if (error) {
+                res.writeHead(404);
+                res.end();
+                return;
+            }
+            res.writeHead(200, {
+                'Content-Type': 'text/json'
+            });
+            res.write(data);
+            res.end();
+        });
+    }
+};
+
+exports.insertRouteInfo = function (req, res) {
+    var body = req.body;
+    if(body.routeList) {
+        routeInfoStore.insertRouteInfo(body.routeList, function (error, data) {
             if (error) {
                 res.writeHead(404);
                 res.end();
