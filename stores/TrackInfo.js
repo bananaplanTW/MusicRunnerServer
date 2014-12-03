@@ -13,6 +13,7 @@ exports.getTrackInfo = function (songList, callback) {
 				song.bpm = -2;
 			} else {
 				song.bpm = data.bpm;
+				song.musicId = data.musicId;
 			}
 			if (length == 0) {
 				callback(null, JSON.stringify(songList));

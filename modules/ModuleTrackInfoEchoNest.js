@@ -13,8 +13,21 @@ var ModuleTrackInfoEchoNest = (function () {
     				}
     				var trackInfo = data;
     				var result = {};
+
+                    try {
+                        result.musicId = trackInfo.id;    
+                    } catch (e) {
+                        result.musicId = -1;
+                    }
+
     				try {
-	    				result.bpm = trackInfo.tempo;
+	    				//result.id = trackInfo.id;
+                        console.log("track", trackInfo);
+                        if (trackInfo.tempo !== undefined && trackInfo.tempo !== null) {
+                            result.bpm = trackInfo.tempo;    
+                        } else {
+                            result.bpm = -1;
+                        }
 	    			} catch (e) {
 	    				result.bpm = -1;
 	    			}

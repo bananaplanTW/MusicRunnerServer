@@ -25,7 +25,7 @@ var getSongFromDB = function (artist, title, callback) {
 };
 
 var insertSongIntoDB = function (data, callback) {
-	var queryString = util.format(insertSongQuery, data.artist, data.title, data.tempo, data.genre, data.duration, data.energy, data.liveness, data.speechiness, data.acousticness, data.instrumentalness, data.loudness, data.valence, data.danceability);
+	var queryString = util.format(insertSongQuery, data.artist, data.title, data.tempo || null, data.genre, data.duration || null, data.energy || null, data.liveness || null, data.speechiness || null, data.acousticness || null, data.instrumentalness || null, data.loudness || null, data.valence || null, data.danceability || null);
 	db.execute(queryString, function(error, rows) {
 		if(error) {
 			callback(error, null);
@@ -38,7 +38,7 @@ var insertSongIntoDB = function (data, callback) {
 
 var getTrackInfoFromEchoNest = function (artist, title, genre, callback) {
 	var echoNestUrl = util.format(urls.EchoNestTrackApi, echoNestKey, artist, title);
-console.log(echoNestUrl);
+//console.log(echoNestUrl);
 	this.HTTPGet(echoNestUrl, function (error, data) {
 		if (error) {
 			errorLog.error("[models/ModelTrackInfoEchoNest.js]: errors when calling EchoNest");
@@ -49,25 +49,32 @@ console.log(echoNestUrl);
             return;
 		}
 		var songData = JSON.parse(data);
-
+		var songMetaData;
 		// insert song into db right after getting data back
 		if (typeof(songData.response.songs[0]) !== 'undefined') {
-			var songMetaData = songData.response.songs[0].audio_summary;
-			songMetaData.artist = artist;
-			songMetaData.title = title;
-			songMetaData.genre = genre;
-			insertSongIntoDB(songMetaData, function (error, rows) {
-				if (error) {
-					errorLog.error("[models/ModelTrackInfoEchoNest.js]: errors when inserting into music db");
-					errorLog.error(error);
-					return;
-				}
-				errorLog.info(rows);
-			});
-			callback(null, songMetaData);
+			songMetaData = songData.response.songs[0].audio_summary;
 		} else {
-			callback(null, null);
+			songMetaData = {};
+			//callback(null, null);
 		}
+
+		songMetaData.artist = artist;
+		songMetaData.title = title;
+		songMetaData.genre = genre;
+		insertSongIntoDB(songMetaData, function (error, rows) {
+			if (error) {
+				errorLog.error("[models/ModelTrackInfoEchoNest.js]: errors when inserting into music db");
+				errorLog.error(error);
+				callback(error, null);
+				return;
+			}
+			errorLog.info(rows);
+			var result = {
+				tempo: songMetaData.tempo,
+				id: rows.insertId
+			};
+			callback(null, result);
+		});
 		return;
 	});
 };
@@ -98,7 +105,7 @@ ModelTrackInfoEchoNest.prototype.getTrackInfo = function(artist, title, genre, c
 					callback(null, data);
 				})
 			} else {
-				console.log("get song in db", rows);
+				//console.log("get song in db", rows);
 				callback(null, rows);
 			}
 		}
