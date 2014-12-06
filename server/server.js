@@ -10,7 +10,6 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     httpLogFile;
 require('../models/ModelMongoDB');
-require('../stores/RouteInfo')
 //var checking_update = require('child_process').fork(__dirname + '/../background/checking_update.js');
 var app = express();
 

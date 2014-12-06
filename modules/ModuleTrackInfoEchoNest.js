@@ -22,7 +22,7 @@ var ModuleTrackInfoEchoNest = (function () {
 
     				try {
 	    				//result.id = trackInfo.id;
-                        console.log("track", trackInfo);
+                        //console.log("track", trackInfo);
                         if (trackInfo.tempo !== undefined && trackInfo.tempo !== null) {
                             result.bpm = trackInfo.tempo;    
                         } else {
